@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — Syntax</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --line: #222;
+      --ink-1: #e8e8e8;
+      --ink-2: #888;
+      --ink-3: #555;
+      --green: #4ade80;
+      --green-dim: rgba(74, 222, 128, 0.15);
+      --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+      --max-w: 640px;
+    }
+
+    body {
+      font-family: var(--mono);
+      background: var(--bg);
+      color: var(--ink-1);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .nav {
+      border-bottom: 1px solid var(--line);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink-1);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--green); }
+    .nav-links { display: flex; gap: 24px; font-size: 13px; }
+    .nav-links a { color: var(--ink-2); }
+    .nav-links a:hover { color: var(--ink-1); text-decoration: none; }
+
+    .content {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--ink-2);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .support-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .support-card h2 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-1);
+      margin-bottom: 8px;
+    }
+
+    .support-card p {
+      font-size: 13px;
+      color: var(--ink-2);
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    .support-link {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--green);
+      background: var(--green-dim);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-family: var(--mono);
+      transition: opacity 0.15s;
+    }
+    .support-link:hover { opacity: 0.8; text-decoration: none; }
+
+    .faq { margin-top: 48px; }
+    .faq h2 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 24px;
+    }
+    .faq-item { margin-bottom: 24px; }
+    .faq-item h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-1);
+      margin-bottom: 6px;
+    }
+    .faq-item p {
+      font-size: 12px;
+      color: var(--ink-2);
+      line-height: 1.8;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--ink-3);
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 12px;
+    }
+    .footer-links a { color: var(--ink-2); font-size: 12px; }
+    .footer-links a:hover { color: var(--ink-1); }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo"><span>&gt;</span> syntax</a>
+    <div class="nav-links">
+      <a href="privacy.html">privacy</a>
+      <a href="support.html">support</a>
+    </div>
+  </nav>
+
+  <div class="content">
+    <h1>support</h1>
+    <p class="subtitle">Need help with Syntax? Here's how to reach us.</p>
+
+    <div class="support-card">
+      <h2>report a bug or request a feature</h2>
+      <p>Open an issue on GitHub. Include steps to reproduce, your iOS version, and any relevant screenshots.</p>
+      <a class="support-link" href="https://github.com/yuanjiadesu/syntax/issues" target="_blank">&gt; open an issue</a>
+    </div>
+
+    <div class="support-card">
+      <h2>email us</h2>
+      <p>For anything else — questions, feedback, or just to say hi.</p>
+      <a class="support-link" href="mailto:support@syntax.fitness">&gt; support@syntax.fitness</a>
+    </div>
+
+    <div class="faq">
+      <h2>## frequently asked</h2>
+
+      <div class="faq-item">
+        <h3>where is my data stored?</h3>
+        <p>Everything stays on your device. Syntax doesn't have servers or cloud sync. Your workout files are plain text stored in the app's local directory.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>do I need an AI API key?</h3>
+        <p>No. The AI coach is completely optional. The app works fully without it. If you want AI features, you bring your own API key from OpenAI, Anthropic, or Google.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>can I export my workouts?</h3>
+        <p>Yes. Your workouts are plain markdown files. You can access them via the Files app when file sharing is enabled.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>does it work with Apple Watch?</h3>
+        <p>Syntax reads workout and heart rate data from Apple Health, which includes data from your Apple Watch. There's no standalone Watch app yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="privacy.html">privacy policy</a>
+      <a href="support.html">support</a>
+      <a href="https://github.com/yuanjiadesu/syntax" target="_blank">github</a>
+    </div>
+    <div>&copy; 2026 Syntax</div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syntax — Plain-Text Workout Tracker</title>
+  <meta name="description" content="A fast, minimal workout tracker that treats your training data like plain text. No account. No cloud. No subscriptions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f0e8;
+      --surface: #eae4d9;
+      --line: #d4cdbf;
+      --ink-1: #1a1a1a;
+      --ink-2: #4a4540;
+      --ink-3: #8a8278;
+      --green: #1a8a42;
+      --green-dim: #e6f2ea;
+      --code-bg: #1c1c1c;
+      --code-ink: #d4d0c8;
+      --code-dim: #6b6560;
+      --code-green: #22c55e;
+      --code-line: #2e2e2e;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Newsreader', Georgia, serif;
+    }
+
+    body {
+      font-family: var(--mono);
+      background: var(--bg);
+      color: var(--ink-1);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* subtle paper texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* --- nav --- */
+    .nav {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink-2);
+      letter-spacing: 0.08em;
+    }
+    .nav-links { display: flex; gap: 24px; font-size: 14px; }
+    .nav-links a { color: var(--ink-3); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink-2); text-decoration: none; }
+
+    /* --- main --- */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* --- hero --- */
+    .hero {
+      padding: 64px 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-text h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink-1);
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero-text h1 em {
+      font-style: italic;
+      color: var(--green);
+    }
+    .hero-desc {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      margin-bottom: 32px;
+    }
+    .hero-desc strong {
+      color: var(--ink-1);
+      font-weight: 500;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 500;
+      color: #fff;
+      background: var(--ink-1);
+      padding: 12px 24px;
+      border-radius: 4px;
+      transition: opacity 0.15s;
+    }
+    .hero-cta:hover { opacity: 0.85; text-decoration: none; color: #fff; }
+    .hero-cta svg { width: 16px; height: 16px; }
+    .hero-sub {
+      font-size: 13px;
+      color: var(--ink-3);
+      margin-top: 10px;
+    }
+
+    /* --- phone mockup --- */
+    .hero-phone {
+      display: flex;
+      justify-content: center;
+    }
+    .phone-frame {
+      width: 240px;
+      background: #1a1a1a;
+      border-radius: 28px;
+      padding: 12px;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.15),
+        0 4px 16px rgba(0,0,0,0.08);
+    }
+    .phone-frame img {
+      width: 100%;
+      border-radius: 18px;
+      display: block;
+    }
+
+    /* --- screenshots row --- */
+    .screens {
+      padding: 72px 0 0;
+    }
+    .screens-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .screen-card {
+      position: relative;
+    }
+    .screen-card img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      display: block;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .screen-card figcaption {
+      font-size: 13px;
+      color: var(--ink-3);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    /* --- divider --- */
+    .sep {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 56px 0;
+    }
+
+    /* --- prose --- */
+    .prose {
+      padding: 0;
+    }
+    .prose p {
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .prose p:last-child {
+      margin-bottom: 0;
+    }
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+    .feature-list li {
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.7;
+      padding: 6px 0;
+    }
+    .feature-list strong {
+      color: var(--ink-1);
+      font-weight: 600;
+    }
+    .feature-list code {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: var(--surface);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    /* --- vault --- */
+    .vault {
+      padding: 0;
+    }
+    .vault-header {
+      font-size: 13px;
+      color: var(--ink-3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .vault-desc {
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .vault-tree {
+      background: var(--code-bg);
+      border: 1px solid var(--code-line);
+      border-radius: 6px;
+      padding: 20px 24px;
+      font-size: 13px;
+      line-height: 2;
+      color: var(--code-ink);
+      overflow-x: auto;
+      margin-bottom: 24px;
+    }
+    .vault-tree .dir { color: var(--code-green); }
+    .vault-tree .file { color: var(--code-ink); }
+    .vault-tree .dim { color: var(--code-dim); }
+    .vault-example {
+      background: var(--code-bg);
+      border: 1px solid var(--code-line);
+      border-radius: 6px;
+      padding: 20px 24px;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--code-ink);
+      overflow-x: auto;
+    }
+    .vault-example .h1 { color: #fff; font-weight: 500; }
+    .vault-example .h2 { color: var(--code-green); font-weight: 500; }
+    .vault-example .meta { color: var(--code-dim); }
+    .vault-example .set { color: var(--code-ink); }
+    .vault-examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .vault-caption {
+      font-size: 12px;
+      color: var(--ink-3);
+      margin-top: 8px;
+    }
+    @media (max-width: 700px) {
+      .vault-examples {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* --- closing --- */
+    .closing {
+      padding: 32px 0 56px;
+      font-size: 14px;
+      color: var(--ink-3);
+    }
+    .closing a { color: var(--ink-2); text-decoration: underline; }
+    .closing a:hover { color: var(--ink-1); }
+
+    /* --- footer --- */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 32px;
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--ink-3);
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--ink-3); font-size: 13px; }
+    .footer-links a:hover { color: var(--ink-2); }
+
+    /* --- responsive --- */
+    @media (max-width: 700px) {
+      .nav, .main, .footer { padding-left: 20px; padding-right: 20px; }
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding-top: 40px;
+      }
+      .hero-phone { order: -1; }
+      .phone-frame { width: 200px; }
+      .screens-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        max-width: 280px;
+      }
+      .footer { flex-direction: column; gap: 12px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-logo">syntax</div>
+    <div class="nav-links">
+      <a href="privacy.html">privacy</a>
+      <a href="support.html">support</a>
+      <a href="https://github.com/yuanjiadesu/syntax">source</a>
+    </div>
+  </nav>
+
+  <div class="main">
+
+    <!-- hero: text + phone -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>train. log.<br><span style="color:var(--green)">own your data.</span></h1>
+        <p class="hero-desc">
+          a workout tracker that saves your sets as plain text. ai analysis optional.
+        </p>
+        <p class="hero-desc" style="margin-top: -16px;">
+          no account. no cloud. no subscription. just markdown files you own.
+        </p>
+        <a class="hero-cta" href="https://apps.apple.com/app/syntax" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          download for iOS
+        </a>
+      </div>
+      <div class="hero-phone">
+        <div class="phone-frame">
+          <img src="screen-workout.png" alt="Syntax workout session with rest timer">
+        </div>
+      </div>
+    </section>
+
+    <!-- more screenshots -->
+    <section class="screens">
+      <div class="screens-row">
+        <figure class="screen-card">
+          <img src="screen-ai.png" alt="AI coach">
+          <figcaption>ai</figcaption>
+        </figure>
+        <figure class="screen-card">
+          <img src="screen-train.png" alt="Training view with muscle recovery bars">
+          <figcaption>train</figcaption>
+        </figure>
+        <figure class="screen-card">
+          <img src="screen-log.png" alt="Workout history log">
+          <figcaption>log</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <hr class="sep">
+
+    <section class="prose features">
+      <ul class="feature-list">
+        <li><strong>markdown workouts</strong> — every set saved as a <code>.md</code> file. open them in any editor, grep them, script them, or hand them to your AI agent</li>
+        <li><strong>apple health sync</strong> — imports runs, walks, and cycling automatically. your cardio and strength data in one place</li>
+        <li><strong>byok ai coach</strong> — bring your own API key. syntax never sees your conversations. it helps you think, not think for you. nothing replaces your hard work</li>
+        <li><strong>fully on-device</strong> — no account, no cloud, no tracking. your data never leaves your phone unless you move it</li>
+        <li><strong>free to log</strong> — no subscription, no paywall, no trials. just open it and train</li>
+      </ul>
+    </section>
+
+    <hr class="sep">
+
+    <section class="prose">
+      <p><strong>why "syntax"?</strong> — syntax is the set of rules that gives structure to a language. this app gives structure to your training — in a format you can read, write, and own.</p>
+    </section>
+
+    <hr class="sep">
+
+    <!-- vault explanation -->
+    <section class="vault">
+      <div class="vault-header">the vault</div>
+      <p class="vault-desc">
+        your training data lives in a folder on your phone. each workout is a markdown file. routines, exercises — all plain text. open them in the Files app, back them up however you want, or write scripts against them.
+      </p>
+
+      <div class="vault-tree"><span class="dir">syntax-vault/</span><br>
+├── <span class="dir">workouts/</span><br>
+│   ├── <span class="file">2026-02-26_211305.workout.md</span><br>
+│   ├── <span class="file">2026-02-25_180254.workout.md</span><br>
+│   └── <span class="dim">...</span><br>
+├── <span class="dir">programs/</span><br>
+│   ├── <span class="file">push-day-a.md</span><br>
+│   └── <span class="file">legs-+-core-day.md</span><br>
+├── <span class="file">exercises.json</span><br>
+├── <span class="file">body.md</span><br>
+└── <span class="file">preferences.md</span></div>
+
+      <div class="vault-examples">
+        <div>
+          <div class="vault-example"><span class="h1"># 2026-02-26 chest + arms day</span><br>
+<br>
+<span class="meta">duration: 57min</span><br>
+<span class="meta">source: syntax</span><br>
+<br>
+<span class="h2">## Barbell Row</span><br>
+<span class="set">- 60kg × 10</span><br>
+<span class="set">- 80kg × 5</span><br>
+<span class="set">- 80kg × 4</span><br>
+<br>
+<span class="h2">## Machine Fly</span><br>
+<span class="set">- 13.75kg × 12</span><br>
+<span class="set">- 13.75kg × 10</span></div>
+          <div class="vault-caption">strength workout</div>
+        </div>
+        <div>
+          <div class="vault-example"><span class="h1"># 2026-02-27 Run</span><br>
+<br>
+<span class="meta">type: run</span><br>
+<span class="meta">duration: 34min</span><br>
+<span class="meta">distance: 5.12km</span><br>
+<span class="meta">pace: 6:38/km</span><br>
+<span class="meta">calories: 386kcal</span><br>
+<span class="meta">avg_heart_rate: 135bpm</span><br>
+<br>
+<span class="dim">&gt; imported from Apple Health</span></div>
+          <div class="vault-caption">cardio import</div>
+        </div>
+      </div>
+    </section>
+
+
+    <p class="closing">it's free on the <a href="https://apps.apple.com/app/syntax" target="_blank">app store</a>.</p>
+
+  </div>
+
+  <footer class="footer">
+    <div>&copy; 2026</div>
+    <div class="footer-links">
+      <a href="privacy.html">privacy</a>
+      <a href="support.html">support</a>
+      <a href="https://github.com/yuanjiadesu/syntax">github</a>
+    </div>
+  </footer>
+</body>
+</html>
