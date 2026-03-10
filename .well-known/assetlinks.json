@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.yuanjiasu.syntax",
+      "sha256_cert_fingerprints": [
+        "D0:DA:62:3B:C3:7D:13:48:43:63:34:CE:94:33:2B:65:A3:6C:66:DB:63:7B:20:55:FF:78:CB:B1:84:A5:CB:AC"
+      ]
+    }
+  }
+]

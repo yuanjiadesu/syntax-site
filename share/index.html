@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shared Routine — Syntax</title>
+  <meta name="description" content="Someone shared a workout routine with you on Syntax.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f5f0e8;
+      --surface: #eae4d9;
+      --line: #d4cdbf;
+      --ink-1: #1a1a1a;
+      --ink-2: #4a4540;
+      --ink-3: #8a8278;
+      --green: #1a8a42;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1c;
+        --surface: #2a2a2a;
+        --line: #3a3a3a;
+        --ink-1: #e8e4dc;
+        --ink-2: #b0a898;
+        --ink-3: #6b6560;
+        --green: #22c55e;
+      }
+    }
+    body {
+      font-family: var(--mono);
+      background: var(--bg);
+      color: var(--ink-1);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      max-width: 400px;
+      width: 100%;
+      margin: 24px;
+      padding: 24px;
+    }
+    .label {
+      color: var(--ink-3);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .count {
+      color: var(--ink-3);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .exercises {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+    .exercises div {
+      padding: 4px 0;
+      color: var(--ink-2);
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--green);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      margin-bottom: 8px;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink-2);
+    }
+    .btn-secondary:hover { background: var(--surface); }
+    .error {
+      color: var(--ink-3);
+      font-size: 13px;
+      text-align: center;
+    }
+    .error a { color: var(--green); }
+  </style>
+</head>
+<body>
+  <div class="card" id="content">
+    <noscript>
+      <p class="error">Enable JavaScript to view shared routines.</p>
+    </noscript>
+  </div>
+  <script>
+    (function () {
+      var container = document.getElementById('content');
+      var params = new URLSearchParams(window.location.search);
+      var encoded = params.get('r');
+
+      if (!encoded) {
+        container.innerHTML = '<p class="error">Invalid share link.<br><a href="/">Go to Syntax</a></p>';
+        return;
+      }
+
+      // Decode base64url → Program
+      try {
+        var b64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
+        while (b64.length % 4) b64 += '=';
+        var json = decodeURIComponent(escape(atob(b64)));
+        var data = JSON.parse(json);
+        if (!data.e || !Array.isArray(data.e)) throw new Error('bad');
+      } catch (e) {
+        container.innerHTML = '<p class="error">This share link is broken or incomplete.<br><a href="/">Go to Syntax</a></p>';
+        return;
+      }
+
+      var name = data.n || 'Shared Routine';
+      var exercises = data.e;
+
+      // Update page title
+      document.title = name + ' — Syntax';
+
+      // Build exercise list
+      var exHtml = exercises.map(function (ex) { return '<div>- ' + ex.replace(/</g, '&lt;') + '</div>'; }).join('');
+
+      // App store links
+      var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+      var android = /Android/.test(navigator.userAgent);
+      var storeUrl = iOS
+        ? 'https://apps.apple.com/app/syntax-workout-tracker/id6746264511'
+        : android
+          ? 'https://play.google.com/store/apps/details?id=com.yuanjiasu.syntax'
+          : 'https://apps.apple.com/app/syntax-workout-tracker/id6746264511';
+      var storeLabel = iOS ? 'Get on App Store' : android ? 'Get on Google Play' : 'Download Syntax';
+
+      // On mobile, try to open the app via custom scheme before showing fallback
+      var isMobile = iOS || android;
+      if (isMobile) {
+        var appUrl = 'com.yuanjiasu.syntax://share?r=' + encoded;
+        var didNavigate = false;
+        window.addEventListener('blur', function () { didNavigate = true; });
+        window.location.href = appUrl;
+        setTimeout(function () {
+          if (!didNavigate && !document.hidden) {
+            renderCard();
+          }
+        }, 1500);
+      } else {
+        renderCard();
+      }
+
+      function renderCard() {
+        container.innerHTML =
+          '<div class="label"># shared routine</div>' +
+          '<div class="name">' + name.replace(/</g, '&lt;') + '</div>' +
+          '<div class="count">' + exercises.length + ' exercises</div>' +
+          '<div class="exercises">' + exHtml + '</div>' +
+          '<a class="btn" href="' + storeUrl + '">' + storeLabel + '</a>' +
+          '<a class="btn btn-secondary" href="/">Learn more about Syntax</a>';
+      }
+    })();
+  </script>
+</body>
+</html>
