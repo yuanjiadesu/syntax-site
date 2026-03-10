@@ -150,21 +150,9 @@
           : 'https://apps.apple.com/app/syntax-workout-tracker/id6759859329';
       var storeLabel = iOS ? 'Get on App Store' : android ? 'Get on Google Play' : 'Download Syntax';
 
-      // On mobile, try to open the app via custom scheme before showing fallback
-      var isMobile = iOS || android;
-      if (isMobile) {
-        var appUrl = 'com.yuanjiasu.syntax://share?r=' + encoded;
-        var didNavigate = false;
-        window.addEventListener('blur', function () { didNavigate = true; });
-        window.location.href = appUrl;
-        setTimeout(function () {
-          if (!didNavigate && !document.hidden) {
-            renderCard();
-          }
-        }, 1500);
-      } else {
-        renderCard();
-      }
+      // Universal Links (iOS) / App Links (Android) handle app-installed case
+      // before the page loads. If we reach here, show the card.
+      renderCard();
 
       function renderCard() {
         container.textContent = '';
