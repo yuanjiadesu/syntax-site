@@ -316,9 +316,16 @@
       .hero-phone { order: -1; }
       .phone-frame { width: 200px; }
       .screens-row {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        max-width: 280px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      .screen-card img {
+        border-radius: 8px;
+      }
+      .screen-card figcaption {
+        font-size: 11px;
       }
       .footer { flex-direction: column; gap: 12px; align-items: flex-start; }
     }
