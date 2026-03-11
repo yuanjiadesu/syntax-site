@@ -96,46 +96,31 @@
       letter-spacing: -0.02em;
       margin-bottom: 20px;
     }
-    .hero-text h1 em {
-      font-style: italic;
-      color: var(--green);
-    }
     .hero-desc {
       font-size: 16px;
       line-height: 1.8;
       color: var(--ink-2);
       margin-bottom: 32px;
     }
-    .hero-desc strong {
-      color: var(--ink-1);
-      font-weight: 500;
-    }
-    .hero-cta {
-      display: inline-flex;
+    .hero-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: 15px;
-      font-weight: 500;
-      color: #fff;
-      background: var(--ink-1);
-      padding: 12px 24px;
-      border-radius: 4px;
-      transition: opacity 0.15s;
     }
-    .hero-cta:hover { opacity: 0.85; text-decoration: none; color: #fff; }
-    .hero-cta svg { width: 16px; height: 16px; }
+    .hero-badges a {
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+      line-height: 0;
+    }
     .hero-sub {
       font-size: 13px;
       color: var(--ink-3);
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     /* --- phone mockup --- */
-    .hero-phone {
-      display: flex;
-      justify-content: center;
-    }
     .phone-frame {
       width: 240px;
       background: #1a1a1a;
@@ -151,90 +136,132 @@
       display: block;
     }
 
-    /* --- screenshots row --- */
-    .screens {
-      padding: 72px 0 0;
-    }
-    .screens-row {
+    /* --- narrative sections --- */
+    .story {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      padding: 80px 0;
     }
-    .screen-card {
-      position: relative;
+    .story + .story {
+      padding-top: 0;
     }
-    .screen-card img {
-      width: 100%;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      display: block;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    .story-phone {
+      display: flex;
+      justify-content: center;
     }
-    .screen-card figcaption {
-      font-size: 13px;
-      color: var(--ink-3);
-      margin-top: 10px;
-      text-align: center;
+    .story-text {
+      max-width: 380px;
     }
+    .story-step {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .story-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink-1);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .story-text p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+    }
+    .story-text p + p {
+      margin-top: 12px;
+    }
+
+    /* flip: phone on left, text on right */
+    .story--flip .story-phone { order: -1; }
 
     /* --- divider --- */
     .sep {
       border: none;
       border-top: 1px solid var(--line);
-      margin: 56px 0;
+      margin: 0;
     }
 
-    /* --- prose --- */
-    .prose {
-      padding: 0;
+    /* --- dual phone showcase --- */
+    .dual {
+      padding: 80px 0;
+      text-align: center;
     }
-    .prose p {
-      font-size: 15px;
-      color: var(--ink-2);
-      line-height: 1.8;
-      margin-bottom: 20px;
+    .dual-header {
+      max-width: 520px;
+      margin: 0 auto 40px;
     }
-    .prose p:last-child {
-      margin-bottom: 0;
+    .dual-step {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+      font-weight: 500;
     }
-    .feature-list {
-      list-style: none;
-      padding: 0;
-    }
-    .feature-list li {
-      font-size: 15px;
-      color: var(--ink-2);
-      line-height: 1.7;
-      padding: 6px 0;
-    }
-    .feature-list strong {
+    .dual-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 400;
+      line-height: 1.2;
       color: var(--ink-1);
-      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
     }
-    .feature-list code {
-      font-family: var(--mono);
-      font-size: 13px;
-      background: var(--surface);
-      padding: 2px 6px;
-      border-radius: 3px;
+    .dual-header p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+    }
+    .dual-phones {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+    }
+    .dual-phones .phone-frame {
+      width: 200px;
+    }
+    .dual-caption {
+      font-size: 12px;
+      color: var(--ink-3);
+      margin-top: 12px;
     }
 
     /* --- vault --- */
     .vault {
-      padding: 0;
+      padding: 80px 0;
+    }
+    .vault-step {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+      font-weight: 500;
     }
     .vault-header {
-      font-size: 13px;
-      color: var(--ink-3);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink-1);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
     }
     .vault-desc {
       font-size: 15px;
       color: var(--ink-2);
       line-height: 1.8;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
+      max-width: 640px;
     }
     .vault-tree {
       background: var(--code-bg);
@@ -250,6 +277,11 @@
     .vault-tree .dir { color: var(--code-green); }
     .vault-tree .file { color: var(--code-ink); }
     .vault-tree .dim { color: var(--code-dim); }
+    .vault-examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
     .vault-example {
       background: var(--code-bg);
       border: 1px solid var(--code-line);
@@ -264,30 +296,59 @@
     .vault-example .h2 { color: var(--code-green); font-weight: 500; }
     .vault-example .meta { color: var(--code-dim); }
     .vault-example .set { color: var(--code-ink); }
-    .vault-examples {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
     .vault-caption {
       font-size: 12px;
       color: var(--ink-3);
       margin-top: 8px;
     }
-    @media (max-width: 700px) {
-      .vault-examples {
-        grid-template-columns: 1fr;
-      }
+
+    /* --- features --- */
+    .features {
+      padding: 0 0 80px;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 48px;
+    }
+    .feature-item strong {
+      display: block;
+      font-size: 14px;
+      color: var(--ink-1);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .feature-item span {
+      font-size: 14px;
+      color: var(--ink-3);
+      line-height: 1.6;
     }
 
     /* --- closing --- */
     .closing {
-      padding: 32px 0 56px;
-      font-size: 14px;
-      color: var(--ink-3);
+      padding: 40px 0 56px;
+      text-align: center;
     }
-    .closing a { color: var(--ink-2); text-decoration: underline; }
-    .closing a:hover { color: var(--ink-1); }
+    .closing-text {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink-2);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .closing-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .closing-badges a {
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+      line-height: 0;
+    }
 
     /* --- footer --- */
     .footer {
@@ -313,19 +374,28 @@
         gap: 40px;
         padding-top: 40px;
       }
-      .hero-phone { order: -1; }
+      .hero .story-phone { order: -1; }
       .phone-frame { width: 200px; }
-      .screens-row {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        max-width: 400px;
-        margin: 0 auto;
+      .story {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 56px 0;
       }
-      .screen-card img {
-        border-radius: 8px;
+      .story + .story { padding-top: 0; }
+      .story-phone { order: -1 !important; }
+      .story-text { max-width: none; }
+      .dual-phones {
+        gap: 16px;
       }
-      .screen-card figcaption {
-        font-size: 11px;
+      .dual-phones .phone-frame {
+        width: 160px;
+      }
+      .vault-examples {
+        grid-template-columns: 1fr;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
       .footer { flex-direction: column; gap: 12px; align-items: flex-start; }
     }
@@ -338,75 +408,114 @@
       <a href="privacy.html">privacy</a>
       <a href="terms.html">terms</a>
       <a href="support.html">support</a>
-      <a href="https://github.com/yuanjiadesu/syntax-site">source</a>
     </div>
   </nav>
 
   <div class="main">
 
-    <!-- hero: text + phone -->
+    <!-- hero -->
     <section class="hero">
       <div class="hero-text">
         <h1>train. log.<br><span style="color:var(--green)">own your data.</span></h1>
         <p class="hero-desc">
-          a plain-text workout tracker. ai-native from day one, but entirely optional.
+          a plain-text workout tracker with a built-in ai coach. every set saved as markdown. no account, no cloud, no tracking.
         </p>
-        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
-          <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank" style="display:inline-block;border-radius:8px;overflow:hidden;line-height:0;">
+        <div class="hero-badges">
+          <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank">
             <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height:44px;">
           </a>
-          <a href="https://play.google.com/store/apps/details?id=com.yuanjiasu.syntax" target="_blank" style="display:inline-block;border-radius:8px;overflow:hidden;line-height:0;">
+          <a href="https://play.google.com/store/apps/details?id=com.yuanjiasu.syntax" target="_blank">
             <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:64px;margin:-10px -12px;">
           </a>
         </div>
-        <p style="font-size: 0.85em; opacity: 0.7; margin-top: 12px;">
-          no account. no cloud. your data stays on your phone.
-        </p>
+        <p class="hero-sub">free to log. pro unlocks ai + more.</p>
       </div>
-      <div class="hero-phone">
+      <div class="story-phone">
         <div class="phone-frame">
-          <img src="screen-workout.png" alt="Syntax workout session with rest timer">
+          <img src="screen-workout.png" alt="Syntax workout session with quick log and rest timer">
         </div>
       </div>
     </section>
 
-    <!-- more screenshots -->
-    <section class="screens">
-      <div class="screens-row">
-        <figure class="screen-card">
-          <img src="screen-ai.png" alt="AI coach">
-          <figcaption>ai</figcaption>
-        </figure>
-        <figure class="screen-card">
-          <img src="screen-train.png" alt="Training view with muscle recovery bars">
-          <figcaption>train</figcaption>
-        </figure>
-        <figure class="screen-card">
-          <img src="screen-log.png" alt="Workout history log">
-          <figcaption>log</figcaption>
-        </figure>
+    <hr class="sep" style="margin-top:80px;">
+
+    <!-- narrative 1: ask -->
+    <section class="story">
+      <div class="story-text">
+        <div class="story-step">01 — ask</div>
+        <h2>tell it what you need</h2>
+        <p>"give me a leg day for 30 minutes." the ai coach reads your history, knows your equipment, and writes a real program — not a generic template.</p>
+        <p>choose a persona. the hype-beast screams encouragement. the stoic gives you sets and shuts up.</p>
+      </div>
+      <div class="story-phone">
+        <div class="phone-frame">
+          <img src="screen-ai-ask.png" alt="Asking the AI coach for a leg day workout">
+        </div>
+      </div>
+    </section>
+
+    <!-- narrative 2: plan -->
+    <section class="story story--flip">
+      <div class="story-text">
+        <div class="story-step">02 — plan</div>
+        <h2>get a structured workout</h2>
+        <p>the ai responds in markdown — the same format your workouts are saved in. warmup sets, working sets, RPE targets, rest guidance. tap to start training immediately.</p>
+      </div>
+      <div class="story-phone">
+        <div class="phone-frame">
+          <img src="screen-ai.png" alt="AI coach response with structured leg day plan">
+        </div>
+      </div>
+    </section>
+
+    <!-- narrative 3: train -->
+    <section class="story">
+      <div class="story-text">
+        <div class="story-step">03 — train</div>
+        <h2>log sets, not menus</h2>
+        <p>the workout screen stays out of your way. tap to log a set, or type naturally — <code>Bench 80 5 5</code> logs bench press at 80kg for 5 reps across 5 sets. the rest timer starts automatically.</p>
+        <p>your plan shows progress at the top. navigate between exercises with a swipe.</p>
+      </div>
+      <div class="story-phone">
+        <div class="phone-frame">
+          <img src="screen-train.png" alt="Active workout with plan progress and set logging">
+        </div>
       </div>
     </section>
 
     <hr class="sep">
 
-    <section class="prose features">
-      <ul class="feature-list">
-        <li><strong>markdown workouts</strong> — every set saved as a <code>.md</code> file. open them in any editor, grep them, script them, or hand them to your AI agent</li>
-        <li><strong>apple health sync</strong> — imports runs, walks, and cycling automatically. your cardio and strength data in one place</li>
-        <li><strong>ai coach</strong> — ask it anything about your training. or skip it entirely — your workouts are markdown files, so any ai agent can read them too.</li>
-        <li><strong>local-first</strong> — everything lives on your phone. no servers, no cloud sync, no analytics, no tracking.</li>
-        <li><strong>honest pricing</strong> — unlimited logging is entirely free. no ads. subscribe to pro for ai coaching and more ($3.99/mo or $29.99/yr).</li>
-      </ul>
+    <!-- dual: exercises -->
+    <section class="dual">
+      <div class="dual-header">
+        <div class="dual-step">exercises</div>
+        <h2>200+ built in. create your own.</h2>
+        <p>every exercise has muscle targets, equipment tags, demo videos, and similar movements. can't find one? type a name and let ai fill the details, or configure it yourself.</p>
+      </div>
+      <div class="dual-phones">
+        <div>
+          <div class="phone-frame">
+            <img src="screen-exercises.png" alt="Exercise detail page with demo video">
+          </div>
+          <div class="dual-caption">bench press detail</div>
+        </div>
+        <div>
+          <div class="phone-frame">
+            <img src="screen-exercise-new.png" alt="Creating a new exercise with AI fill">
+          </div>
+          <div class="dual-caption">create with ai</div>
+        </div>
+      </div>
     </section>
 
     <hr class="sep">
 
-    <!-- vault explanation -->
+    <!-- vault -->
     <section class="vault">
-      <div class="vault-header">the vault</div>
+      <div class="vault-step">your data</div>
+      <div class="vault-header">plain text, not a database</div>
       <p class="vault-desc">
-        your training data lives in a folder on your phone. each workout is a markdown file. routines, exercises — all plain text. open them in the Files app, back them up however you want, or write scripts against them.
+        your training data lives in a folder on your phone. each workout is a markdown file. routines, exercises — all plain text. open them in the Files app, back them up however you want, or hand the whole folder to your favourite ai agent.
       </p>
 
       <div class="vault-tree"><span class="dir">syntax-vault/</span><br>
@@ -454,7 +563,42 @@
       </div>
     </section>
 
-    <p class="closing">available on the <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank">app store</a> and <a href="https://play.google.com/store/apps/details?id=com.yuanjiasu.syntax" target="_blank">google play</a>.</p>
+    <hr class="sep">
+
+    <!-- features -->
+    <section class="features">
+      <div class="feature-grid" style="padding-top: 56px;">
+        <div class="feature-item">
+          <strong>apple health sync</strong>
+          <span>imports runs, walks, and cycling automatically. cardio and strength in one place.</span>
+        </div>
+        <div class="feature-item">
+          <strong>local-first</strong>
+          <span>everything on your phone. no servers, no cloud sync, no analytics.</span>
+        </div>
+        <div class="feature-item">
+          <strong>share routines</strong>
+          <span>send a link. your friend opens it and starts training — no sign-up needed.</span>
+        </div>
+        <div class="feature-item">
+          <strong>honest pricing</strong>
+          <span>unlimited logging is free. no ads. pro adds ai coaching and more — $3.99/mo or $29.99/yr.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- closing CTA -->
+    <section class="closing">
+      <p class="closing-text">your training data should outlive any app.</p>
+      <div class="closing-badges">
+        <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height:44px;">
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.yuanjiasu.syntax" target="_blank">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:64px;margin:-10px -12px;">
+        </a>
+      </div>
+    </section>
 
   </div>
 
