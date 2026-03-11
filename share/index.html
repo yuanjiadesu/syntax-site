@@ -140,9 +140,6 @@
       // Update page title
       document.title = name + ' — Syntax';
 
-      // Build exercise list
-      var exHtml = exercises.map(function (ex) { return '<div>- ' + ex.replace(/</g, '&lt;') + '</div>'; }).join('');
-
       // App store links
       var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
       var android = /Android/.test(navigator.userAgent);
@@ -153,30 +150,48 @@
           : 'https://apps.apple.com/app/syntax-workout-tracker/id6759859329';
       var storeLabel = iOS ? 'Get on App Store' : android ? 'Get on Google Play' : 'Download Syntax';
 
-      // On mobile, try to open the app via custom scheme before showing fallback
-      var isMobile = iOS || android;
-      if (isMobile) {
-        var appUrl = 'com.yuanjiasu.syntax://share?r=' + encoded;
-        var didNavigate = false;
-        window.addEventListener('blur', function () { didNavigate = true; });
-        window.location.href = appUrl;
-        setTimeout(function () {
-          if (!didNavigate && !document.hidden) {
-            renderCard();
-          }
-        }, 1500);
-      } else {
-        renderCard();
-      }
+      // Universal Links (iOS) / App Links (Android) handle app-installed case
+      // before the page loads. If we reach here, show the card.
+      renderCard();
 
       function renderCard() {
-        container.innerHTML =
-          '<div class="label"># shared routine</div>' +
-          '<div class="name">' + name.replace(/</g, '&lt;') + '</div>' +
-          '<div class="count">' + exercises.length + ' exercises</div>' +
-          '<div class="exercises">' + exHtml + '</div>' +
-          '<a class="btn" href="' + storeUrl + '">' + storeLabel + '</a>' +
-          '<a class="btn btn-secondary" href="/">Learn more about Syntax</a>';
+        container.textContent = '';
+
+        var label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = '# shared routine';
+        container.appendChild(label);
+
+        var nameEl = document.createElement('div');
+        nameEl.className = 'name';
+        nameEl.textContent = name;
+        container.appendChild(nameEl);
+
+        var count = document.createElement('div');
+        count.className = 'count';
+        count.textContent = exercises.length + ' exercises';
+        container.appendChild(count);
+
+        var exList = document.createElement('div');
+        exList.className = 'exercises';
+        exercises.forEach(function (ex) {
+          var row = document.createElement('div');
+          row.textContent = '- ' + ex;
+          exList.appendChild(row);
+        });
+        container.appendChild(exList);
+
+        var btn = document.createElement('a');
+        btn.className = 'btn';
+        btn.href = storeUrl;
+        btn.textContent = storeLabel;
+        container.appendChild(btn);
+
+        var btnSecondary = document.createElement('a');
+        btnSecondary.className = 'btn btn-secondary';
+        btnSecondary.href = '/';
+        btnSecondary.textContent = 'Learn more about Syntax';
+        container.appendChild(btnSecondary);
       }
     })();
   </script>
