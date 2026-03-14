@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syntax vs Strong vs Hevy vs Fitbod — Workout Tracker Comparison 2026</title>
+  <meta name="description" content="Compare Syntax with Strong, Hevy, JEFIT, FitNotes, Fitbod, and Freeletics. See which workout tracker offers the best data ownership, AI coaching, privacy, and pricing.">
+  <link rel="canonical" href="https://syntax.fitness/compare.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syntax.fitness/compare.html">
+  <meta property="og:title" content="Syntax vs Strong vs Hevy vs Fitbod — Workout Tracker Comparison 2026">
+  <meta property="og:description" content="Compare workout trackers on data ownership, AI coaching, privacy, and pricing.">
+  <meta property="og:image" content="https://syntax.fitness/screen-workout.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syntax vs Strong vs Hevy vs Fitbod — Workout Tracker Comparison">
+  <meta name="twitter:description" content="Compare workout trackers on data ownership, AI coaching, privacy, and pricing.">
+  <meta name="twitter:image" content="https://syntax.fitness/screen-workout.png">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f0e8;
+      --surface: #eae4d9;
+      --line: #d4cdbf;
+      --ink-1: #1a1a1a;
+      --ink-2: #4a4540;
+      --ink-3: #8a8278;
+      --green: #1a8a42;
+      --green-dim: #e6f2ea;
+      --code-bg: #1c1c1c;
+      --code-ink: #d4d0c8;
+      --code-dim: #6b6560;
+      --code-green: #22c55e;
+      --code-line: #2e2e2e;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Newsreader', Georgia, serif;
+    }
+
+    body {
+      font-family: var(--mono);
+      background: var(--bg);
+      color: var(--ink-1);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* subtle paper texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* --- nav --- */
+    .nav {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink-2);
+      letter-spacing: 0.08em;
+    }
+    .nav-links { display: flex; gap: 24px; font-size: 14px; }
+    .nav-links a { color: var(--ink-3); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink-2); text-decoration: none; }
+
+    /* --- main --- */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* --- page header --- */
+    .page-header {
+      padding: 64px 0 48px;
+    }
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink-1);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .page-header p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+    }
+
+    /* --- comparison table --- */
+    .table-wrap {
+      overflow-x: auto;
+      margin-bottom: 64px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      line-height: 1.6;
+      min-width: 700px;
+    }
+    .compare-table th,
+    .compare-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    .compare-table thead th {
+      background: var(--surface);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+    }
+    .compare-table tbody tr:hover {
+      background: rgba(0,0,0,0.015);
+    }
+    .compare-table .row-syntax {
+      background: var(--green-dim);
+    }
+    .compare-table .row-syntax:hover {
+      background: #daeee0;
+    }
+    .compare-table .app-name {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* --- narrative sections --- */
+    .section {
+      padding: 0 0 48px;
+    }
+    .section h2 {
+      font-family: var(--serif);
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink-1);
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+    .section p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      max-width: 640px;
+    }
+    .section p + p {
+      margin-top: 12px;
+    }
+
+    /* --- divider --- */
+    .sep {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 0 0 48px;
+    }
+
+    /* --- closing CTA --- */
+    .closing {
+      padding: 40px 0 56px;
+      text-align: center;
+    }
+    .closing-text {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink-2);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .closing-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .closing-badges a {
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    /* --- footer --- */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 32px;
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--ink-3);
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--ink-3); font-size: 13px; }
+    .footer-links a:hover { color: var(--ink-2); }
+
+    /* --- responsive --- */
+    @media (max-width: 700px) {
+      .nav, .main, .footer { padding-left: 20px; padding-right: 20px; }
+      .page-header { padding-top: 40px; }
+      .footer { flex-direction: column; gap: 12px; align-items: flex-start; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Workout Tracker Comparison 2026",
+    "url": "https://syntax.fitness/compare.html",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Syntax Fitness",
+      "url": "https://syntax.fitness"
+    }
+  }
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-logo"><a href="index.html" style="color: inherit; text-decoration: none;">syntax</a></div>
+    <div class="nav-links">
+      <a href="faq.html">faq</a>
+      <a href="compare.html">compare</a>
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+      <a href="support.html">support</a>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <!-- header -->
+    <div class="page-header">
+      <h1>how syntax compares</h1>
+      <p>an honest look at how syntax stacks up against other workout trackers.</p>
+    </div>
+
+    <!-- comparison table -->
+    <div class="table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>App</th>
+            <th>Data Format</th>
+            <th>Offline</th>
+            <th>AI Coach</th>
+            <th>Pricing</th>
+            <th>Data Export</th>
+            <th>Privacy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-syntax">
+            <td class="app-name">Syntax</td>
+            <td>Plain text (markdown)</td>
+            <td>Full offline</td>
+            <td>Conversational AI (Gemini)</td>
+            <td>Free + Pro $3.99/mo</td>
+            <td>Files on your phone</td>
+            <td>No servers, no analytics</td>
+          </tr>
+          <tr>
+            <td class="app-name">Strong</td>
+            <td>Proprietary database</td>
+            <td>Partial (needs sync)</td>
+            <td>No</td>
+            <td>Free + Pro $4.99/mo</td>
+            <td>CSV export</td>
+            <td>Cloud account required</td>
+          </tr>
+          <tr>
+            <td class="app-name">Hevy</td>
+            <td>Proprietary database</td>
+            <td>Partial</td>
+            <td>No</td>
+            <td>Free + Pro $8.99/mo</td>
+            <td>CSV export</td>
+            <td>Cloud account required</td>
+          </tr>
+          <tr>
+            <td class="app-name">JEFIT</td>
+            <td>Proprietary database</td>
+            <td>Partial</td>
+            <td>No</td>
+            <td>Free + Elite $6.99/mo</td>
+            <td>Limited</td>
+            <td>Ads in free tier</td>
+          </tr>
+          <tr>
+            <td class="app-name">FitNotes</td>
+            <td>SQLite database</td>
+            <td>Full offline</td>
+            <td>No</td>
+            <td>Free (Android only)</td>
+            <td>CSV export</td>
+            <td>Local storage</td>
+          </tr>
+          <tr>
+            <td class="app-name">Fitbod</td>
+            <td>Proprietary database</td>
+            <td>No</td>
+            <td>Algorithm-based</td>
+            <td>$12.99/mo</td>
+            <td>No</td>
+            <td>Cloud required</td>
+          </tr>
+          <tr>
+            <td class="app-name">Freeletics</td>
+            <td>Proprietary database</td>
+            <td>Partial</td>
+            <td>Algorithm-based</td>
+            <td>$7.49/mo</td>
+            <td>No</td>
+            <td>Cloud required</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="sep">
+
+    <!-- why plain text matters -->
+    <div class="section">
+      <h2>why plain text matters</h2>
+      <p>most workout apps store your data in a proprietary database you can't read, can't move, and can't back up without their permission. if the app shuts down or changes pricing, your years of training history go with it.</p>
+      <p>syntax saves every workout as a markdown file on your phone. you can open them in any text editor, grep through them in a terminal, or feed them to an ai agent. your data is yours in a format that will outlive any app. <a href="plain-text-fitness.html">read more about plain-text fitness</a>.</p>
+    </div>
+
+    <!-- ai coach vs algorithm -->
+    <div class="section">
+      <h2>ai coach vs algorithm</h2>
+      <p>fitbod and freeletics use fixed algorithms to generate workouts. they follow rules — rotate muscle groups, increase weight by X% — but they can't reason about your goals, injuries, or schedule in natural language.</p>
+      <p>syntax uses a conversational ai coach powered by gemini. it reads your full training history, understands context ("i tweaked my shoulder last week"), and writes programs the way a human coach would — with explanations, alternatives, and real periodisation. <a href="ai-coach.html">learn how the ai coach works</a>.</p>
+    </div>
+
+    <!-- what others do better -->
+    <div class="section">
+      <h2>what others do better</h2>
+      <p>syntax doesn't do everything. strong and hevy have social features — you can follow friends, share workouts, and compare stats on leaderboards. JEFIT and freeletics offer large video exercise libraries with detailed form guides. fitbod has a polished apple watch app for wrist-based logging.</p>
+      <p>if social motivation, video libraries, or watch apps are important to you, those are legitimate reasons to pick a different tracker. syntax is built for people who care most about data ownership, privacy, and an ai coach that actually reads your history.</p>
+    </div>
+
+    <hr class="sep">
+
+    <!-- download CTA -->
+    <section class="closing">
+      <p class="closing-text">your training data should outlive any app.</p>
+      <div class="closing-badges">
+        <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height:44px;">
+        </a>
+        <a href="https://play.google.com/apps/internaltest/4701061349251878084" target="_blank">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:64px;margin:-10px -12px;">
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div>&copy; 2026</div>
+    <div class="footer-links">
+      <a href="faq.html">faq</a>
+      <a href="compare.html">compare</a>
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+      <a href="support.html">support</a>
+      <a href="https://github.com/yuanjiadesu/syntax-site">github</a>
+    </div>
+  </footer>
+</body>
+</html>

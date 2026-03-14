@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Syntax — Plain-Text Workout Tracker</title>
   <meta name="description" content="A fast, minimal workout tracker that treats your training data like plain text. No account. No cloud. Your data stays on your phone.">
+  <link rel="canonical" href="https://syntax.fitness/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syntax.fitness/">
+  <meta property="og:title" content="Syntax — Plain-Text Workout Tracker with AI Coach">
+  <meta property="og:description" content="A fast, minimal workout tracker that saves every set as plain text. Built-in AI coach. No account, no cloud. Your data stays on your phone.">
+  <meta property="og:image" content="https://syntax.fitness/screen-workout.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syntax — Plain-Text Workout Tracker with AI Coach">
+  <meta name="twitter:description" content="A fast, minimal workout tracker that saves every set as plain text. Built-in AI coach. No account, no cloud. Your data stays on your phone.">
+  <meta name="twitter:image" content="https://syntax.fitness/screen-workout.png">
+
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -400,18 +415,76 @@
       .footer { flex-direction: column; gap: 12px; align-items: flex-start; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Syntax Fitness",
+    "operatingSystem": ["iOS", "Android"],
+    "applicationCategory": "HealthApplication",
+    "description": "A plain-text workout tracker with a built-in AI coach. Every set saved as markdown. No account, no cloud, no tracking.",
+    "url": "https://syntax.fitness",
+    "screenshot": [
+      "https://syntax.fitness/screen-workout.png",
+      "https://syntax.fitness/screen-ai-ask.png",
+      "https://syntax.fitness/screen-ai.png",
+      "https://syntax.fitness/screen-train.png",
+      "https://syntax.fitness/screen-exercises.png",
+      "https://syntax.fitness/screen-exercise-new.png"
+    ],
+    "offers": [
+      {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Free — unlimited workout logging"
+      },
+      {
+        "@type": "Offer",
+        "price": "3.99",
+        "priceCurrency": "USD",
+        "description": "Pro Monthly — AI coaching and more",
+        "priceValidUntil": "2027-12-31"
+      },
+      {
+        "@type": "Offer",
+        "price": "29.99",
+        "priceCurrency": "USD",
+        "description": "Pro Yearly — AI coaching and more",
+        "priceValidUntil": "2027-12-31"
+      }
+    ],
+    "downloadUrl": [
+      "https://apps.apple.com/gb/app/syntax-fitness/id6759859329",
+      "https://play.google.com/apps/internaltest/4701061349251878084"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "Syntax",
+      "url": "https://syntax.fitness",
+      "sameAs": [
+        "https://github.com/yuanjiadesu/syntax-site",
+        "https://apps.apple.com/gb/app/syntax-fitness/id6759859329",
+        "https://www.reddit.com/r/smartfitness/comments/1rt6k18/i_built_a_plain_text_workout_tracker_thats_ai/",
+        "https://www.superlinear.academy/c/share-your-projects/ai-917755"
+      ]
+    }
+  }
+  </script>
 </head>
 <body>
   <nav class="nav">
     <div class="nav-logo">syntax</div>
     <div class="nav-links">
+      <a href="faq.html">faq</a>
+      <a href="compare.html">compare</a>
       <a href="privacy.html">privacy</a>
       <a href="terms.html">terms</a>
       <a href="support.html">support</a>
     </div>
   </nav>
 
-  <div class="main">
+  <main class="main">
 
     <!-- hero -->
     <section class="hero">
@@ -600,12 +673,38 @@
       </div>
     </section>
 
-  </div>
+    <!-- learn more -->
+    <hr class="sep">
+    <section class="features" style="padding: 56px 0 40px;">
+      <div class="feature-grid">
+        <div class="feature-item">
+          <strong><a href="faq.html">frequently asked questions</a></strong>
+          <span>everything you need to know about syntax — pricing, privacy, data format, and more.</span>
+        </div>
+        <div class="feature-item">
+          <strong><a href="compare.html">how syntax compares</a></strong>
+          <span>side-by-side with strong, hevy, fitbod, and other workout trackers.</span>
+        </div>
+        <div class="feature-item">
+          <strong><a href="plain-text-fitness.html">plain-text fitness</a></strong>
+          <span>why your training data should be markdown files, not database rows.</span>
+        </div>
+        <div class="feature-item">
+          <strong><a href="ai-coach.html">the ai coach</a></strong>
+          <span>how the ai reads your history and writes real programs — not templates.</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <footer class="footer">
     <div>&copy; 2026</div>
     <div class="footer-links">
+      <a href="faq.html">faq</a>
+      <a href="compare.html">compare</a>
       <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
       <a href="support.html">support</a>
       <a href="https://github.com/yuanjiadesu/syntax-site">github</a>
     </div>

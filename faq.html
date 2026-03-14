@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — Syntax Fitness</title>
+  <meta name="description" content="Frequently asked questions about Syntax Fitness. Free plain-text workout tracker with AI coaching. No account, offline-first, your data stays on your phone.">
+  <link rel="canonical" href="https://syntax.fitness/faq.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syntax.fitness/faq.html">
+  <meta property="og:title" content="FAQ — Syntax Fitness | Plain-Text Workout Tracker">
+  <meta property="og:description" content="Everything you need to know about Syntax — pricing, privacy, data format, AI coaching, and more.">
+  <meta property="og:image" content="https://syntax.fitness/screen-workout.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FAQ — Syntax Fitness">
+  <meta name="twitter:description" content="Everything you need to know about Syntax — pricing, privacy, data format, AI coaching, and more.">
+  <meta name="twitter:image" content="https://syntax.fitness/screen-workout.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f0e8;
+      --surface: #eae4d9;
+      --line: #d4cdbf;
+      --ink-1: #1a1a1a;
+      --ink-2: #4a4540;
+      --ink-3: #8a8278;
+      --green: #1a8a42;
+      --green-dim: #e6f2ea;
+      --code-bg: #1c1c1c;
+      --code-ink: #d4d0c8;
+      --code-dim: #6b6560;
+      --code-green: #22c55e;
+      --code-line: #2e2e2e;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Newsreader', Georgia, serif;
+    }
+
+    body {
+      font-family: var(--mono);
+      background: var(--bg);
+      color: var(--ink-1);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* subtle paper texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* --- nav --- */
+    .nav {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink-2);
+      letter-spacing: 0.08em;
+    }
+    .nav-links { display: flex; gap: 24px; font-size: 14px; }
+    .nav-links a { color: var(--ink-3); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink-2); text-decoration: none; }
+
+    /* --- main --- */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* --- page header --- */
+    .page-header {
+      padding: 64px 0 48px;
+    }
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink-1);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .page-header p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      max-width: 640px;
+    }
+
+    /* --- faq --- */
+    .faq-list {
+      padding-bottom: 40px;
+    }
+    .faq-list details {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-list details:first-child {
+      border-top: 1px solid var(--line);
+    }
+    .faq-list summary {
+      padding: 20px 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink-1);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after {
+      content: '+';
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--ink-3);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-list details[open] summary::after {
+      content: '\2212';
+    }
+    .faq-list details p {
+      padding: 0 0 20px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      max-width: 720px;
+    }
+
+    /* --- closing --- */
+    .closing {
+      padding: 40px 0 56px;
+      text-align: center;
+    }
+    .closing-text {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink-2);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .closing-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .closing-badges a {
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    /* --- divider --- */
+    .sep {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 0;
+    }
+
+    /* --- footer --- */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 32px;
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--ink-3);
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--ink-3); font-size: 13px; }
+    .footer-links a:hover { color: var(--ink-2); }
+
+    /* --- responsive --- */
+    @media (max-width: 700px) {
+      .nav, .main, .footer { padding-left: 20px; padding-right: 20px; }
+      .page-header { padding: 40px 0 32px; }
+      .footer { flex-direction: column; gap: 12px; align-items: flex-start; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Syntax?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Syntax is a plain-text workout tracker with a built-in AI coach. Every set is saved as a markdown file on your phone. No account needed, no cloud sync, no tracking."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Syntax free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Unlimited workout logging is free with no ads. Syntax Pro ($3.99/mo or $29.99/yr) adds AI coaching, Apple Health sync, and more."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Syntax works entirely offline. All data is stored on your device. The only feature that needs internet is the AI coach."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to create an account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. There is no account, no sign-up, no email required. Open the app and start logging."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What format are workouts saved in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plain markdown (.md) files. Each workout is a human-readable text file you can open in any text editor, back up however you want, or feed to an AI agent."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I export my data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Your workouts are files in a folder on your phone. Access them via the Files app (iOS) or file manager (Android). No export button needed — the files are already yours."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it sync with Apple Health?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Syntax imports runs, walks, and cycling from Apple Health and writes strength workouts back. All your training in one place."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the AI coach work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tell it what you need and it reads your history, knows your equipment, and writes a structured program. Choose a persona — the hype-beast or the stoic."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data private?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Syntax has no servers, no analytics, no tracking. Your data never leaves your device unless you use the optional AI coach, which routes messages securely."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Syntax different from Strong, Hevy, or Fitbod?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Syntax stores data as plain text you own, not in a proprietary database. It's local-first with no account needed. And the AI coach writes conversational programs, not algorithm-generated templates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it available on Android?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Syntax is available on both iOS (App Store) and Android (Google Play)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I share routines with friends?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Send a link. Your friend opens it and starts training — no sign-up needed."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-logo"><a href="index.html" style="color: inherit; text-decoration: none;">syntax</a></div>
+    <div class="nav-links">
+      <a href="faq.html">faq</a>
+      <a href="compare.html">compare</a>
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+      <a href="support.html">support</a>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <section class="page-header">
+      <h1>frequently asked questions</h1>
+      <p>everything you need to know about syntax — pricing, privacy, data format, ai coaching, and more.</p>
+    </section>
+
+    <div class="faq-list">
+      <details>
+        <summary>What is Syntax?</summary>
+        <p>Syntax is a plain-text workout tracker with a built-in AI coach. Every set is saved as a markdown file on your phone. No account needed, no cloud sync, no tracking.</p>
+      </details>
+
+      <details>
+        <summary>Is Syntax free?</summary>
+        <p>Yes. Unlimited workout logging is free with no ads. Syntax Pro ($3.99/mo or $29.99/yr) adds AI coaching, Apple Health sync, and more.</p>
+      </details>
+
+      <details>
+        <summary>Does it work offline?</summary>
+        <p>Yes. Syntax works entirely offline. All data is stored on your device. The only feature that needs internet is the AI coach.</p>
+      </details>
+
+      <details>
+        <summary>Do I need to create an account?</summary>
+        <p>No. There is no account, no sign-up, no email required. Open the app and start logging.</p>
+      </details>
+
+      <details>
+        <summary>What format are workouts saved in?</summary>
+        <p>Plain markdown (.md) files. Each workout is a human-readable text file you can open in any text editor, back up however you want, or feed to an AI agent.</p>
+      </details>
+
+      <details>
+        <summary>Can I export my data?</summary>
+        <p>Yes. Your workouts are files in a folder on your phone. Access them via the Files app (iOS) or file manager (Android). No export button needed — the files are already yours.</p>
+      </details>
+
+      <details>
+        <summary>Does it sync with Apple Health?</summary>
+        <p>Yes. Syntax imports runs, walks, and cycling from Apple Health and writes strength workouts back. All your training in one place.</p>
+      </details>
+
+      <details>
+        <summary>How does the AI coach work?</summary>
+        <p>Tell it what you need and it reads your history, knows your equipment, and writes a structured program. Choose a persona — the hype-beast or the stoic. <a href="ai-coach.html">learn more</a></p>
+      </details>
+
+      <details>
+        <summary>Is my data private?</summary>
+        <p>Yes. Syntax has no servers, no analytics, no tracking. Your data never leaves your device unless you use the optional AI coach, which routes messages securely. <a href="privacy.html">read our privacy policy</a></p>
+      </details>
+
+      <details>
+        <summary>How is Syntax different from Strong, Hevy, or Fitbod?</summary>
+        <p>Syntax stores data as plain text you own, not in a proprietary database. It's local-first with no account needed. And the AI coach writes conversational programs, not algorithm-generated templates. <a href="compare.html">see the comparison</a></p>
+      </details>
+
+      <details>
+        <summary>Is it available on Android?</summary>
+        <p>Yes. Syntax is available on both iOS (App Store) and Android (Google Play).</p>
+      </details>
+
+      <details>
+        <summary>Can I share routines with friends?</summary>
+        <p>Yes. Send a link. Your friend opens it and starts training — no sign-up needed.</p>
+      </details>
+    </div>
+
+    <hr class="sep">
+
+    <section style="padding: 40px 0;">
+      <h2 style="font-family: var(--serif); font-size: 24px; font-weight: 400; margin-bottom: 16px;">read more about syntax</h2>
+      <ul style="font-size: 15px; line-height: 2; color: var(--ink-2); list-style: none;">
+        <li><a href="https://www.reddit.com/r/smartfitness/comments/1rt6k18/i_built_a_plain_text_workout_tracker_thats_ai/" target="_blank">r/smartfitness — "I built a plain text workout tracker that's AI-native"</a></li>
+        <li><a href="https://www.superlinear.academy/c/share-your-projects/ai-917755" target="_blank">Superlinear Academy — AI-powered fitness tracking</a></li>
+      </ul>
+    </section>
+
+    <hr class="sep">
+
+    <section class="closing">
+      <p class="closing-text">your training data should outlive any app.</p>
+      <div class="closing-badges">
+        <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height:44px;">
+        </a>
+        <a href="https://play.google.com/apps/internaltest/4701061349251878084" target="_blank">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:64px;margin:-10px -12px;">
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div>&copy; 2026</div>
+    <div class="footer-links">
+      <a href="faq.html">faq</a>
+      <a href="compare.html">compare</a>
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+      <a href="support.html">support</a>
+      <a href="https://github.com/yuanjiadesu/syntax-site">github</a>
+    </div>
+  </footer>
+</body>
+</html>
