@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Workout Coach — How Syntax Uses AI to Plan Your Training</title>
+  <meta name="description" content="Syntax's AI coach reads your workout history and writes personalized programs in plain text. Not a template engine — a conversational AI that knows your training.">
+  <link rel="canonical" href="https://syntax.fitness/ai-coach.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syntax.fitness/ai-coach.html">
+  <meta property="og:title" content="AI Workout Coach — How Syntax Uses AI to Plan Your Training">
+  <meta property="og:description" content="A conversational AI that reads your workout history and writes real programs — not templates.">
+  <meta property="og:image" content="https://syntax.fitness/screen-ai.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Workout Coach — Syntax Fitness">
+  <meta name="twitter:description" content="A conversational AI that reads your workout history and writes real programs — not templates.">
+  <meta name="twitter:image" content="https://syntax.fitness/screen-ai.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f0e8;
+      --surface: #eae4d9;
+      --line: #d4cdbf;
+      --ink-1: #1a1a1a;
+      --ink-2: #4a4540;
+      --ink-3: #8a8278;
+      --green: #1a8a42;
+      --green-dim: #e6f2ea;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Newsreader', Georgia, serif;
+    }
+
+    body {
+      font-family: var(--mono);
+      background: var(--bg);
+      color: var(--ink-1);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* subtle paper texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* --- nav --- */
+    .nav {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink-2);
+      letter-spacing: 0.08em;
+    }
+    .nav-links { display: flex; gap: 24px; font-size: 14px; }
+    .nav-links a { color: var(--ink-3); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink-2); text-decoration: none; }
+
+    /* --- main --- */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* --- page header --- */
+    .page-header {
+      padding: 64px 0 0;
+    }
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink-1);
+      letter-spacing: -0.02em;
+    }
+
+    /* --- content sections --- */
+    .section {
+      padding: 56px 0;
+    }
+    .section h2 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink-1);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .section p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      max-width: 640px;
+    }
+    .section p + p {
+      margin-top: 12px;
+    }
+
+    /* --- flow list --- */
+    .flow-list {
+      list-style: none;
+      margin: 20px 0 0;
+      max-width: 640px;
+    }
+    .flow-list li {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      padding: 6px 0 6px 24px;
+      position: relative;
+    }
+    .flow-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    /* --- phone frame --- */
+    .phone-frame {
+      width: 200px;
+      background: #1a1a1a;
+      border-radius: 36px;
+      padding: 5px;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.15),
+        0 4px 16px rgba(0,0,0,0.08);
+    }
+    .phone-frame img {
+      width: 100%;
+      border-radius: 32px;
+      display: block;
+    }
+
+    /* --- dual phones --- */
+    .phones-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    .phone-col {
+      text-align: center;
+    }
+    .phone-caption {
+      font-size: 12px;
+      color: var(--ink-3);
+      margin-top: 12px;
+    }
+
+    /* --- divider --- */
+    .sep {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 0;
+    }
+
+    /* --- closing --- */
+    .closing {
+      padding: 40px 0 56px;
+      text-align: center;
+    }
+    .closing-text {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink-2);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .closing-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .closing-badges a {
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    /* --- footer --- */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 32px;
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--ink-3);
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--ink-3); font-size: 13px; }
+    .footer-links a:hover { color: var(--ink-2); }
+
+    /* --- responsive --- */
+    @media (max-width: 700px) {
+      .nav, .main, .footer { padding-left: 20px; padding-right: 20px; }
+      .page-header { padding-top: 40px; }
+      .phones-row {
+        gap: 16px;
+      }
+      .phone-frame {
+        width: 160px;
+      }
+      .footer { flex-direction: column; gap: 12px; align-items: flex-start; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "How the AI Coach Works",
+    "url": "https://syntax.fitness/ai-coach.html",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Syntax Fitness",
+      "url": "https://syntax.fitness"
+    }
+  }
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo" style="text-decoration:none;">syntax</a>
+    <div class="nav-links">
+      <a href="faq.html">faq</a>
+      <a href="compare.html">compare</a>
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+      <a href="support.html">support</a>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <!-- page header -->
+    <section class="page-header">
+      <h1>how the ai coach works</h1>
+    </section>
+
+    <hr class="sep" style="margin-top:40px;">
+
+    <!-- not a template engine -->
+    <section class="section">
+      <h2>not a template engine</h2>
+      <p>Most workout apps generate programs from fixed algorithms. Fitbod rotates muscle groups on a schedule. Freeletics picks from a library of pre-built circuits. They feel personalised, but they are not — they are template engines with a settings page.</p>
+      <p>Syntax's AI coach is different. It is a conversational AI that reads your actual training history — every set, every exercise, every session. It understands your available equipment, your recent volume, and your goals. When it writes a program, it writes one that is genuinely yours.</p>
+    </section>
+
+    <hr class="sep">
+
+    <!-- how it works -->
+    <section class="section">
+      <h2>how it works</h2>
+      <ul class="flow-list">
+        <li>You tell it what you need in natural language — "give me a leg day for 30 minutes" or "upper body push, I only have dumbbells today"</li>
+        <li>It reads your workout history and knows your equipment</li>
+        <li>It writes a structured program in markdown — warmup sets, working sets, RPE targets, rest guidance</li>
+        <li>You tap to start training immediately</li>
+      </ul>
+
+      <div class="phones-row">
+        <div class="phone-col">
+          <div class="phone-frame">
+            <img src="screen-ai-ask.png" alt="Asking the AI coach for a workout">
+          </div>
+          <div class="phone-caption">ask in natural language</div>
+        </div>
+        <div class="phone-col">
+          <div class="phone-frame">
+            <img src="screen-ai.png" alt="AI coach response with structured workout plan">
+          </div>
+          <div class="phone-caption">get a structured program</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="sep">
+
+    <!-- personas -->
+    <section class="section">
+      <h2>personas</h2>
+      <p>Choose your coaching style. The hype-beast screams encouragement. The stoic gives you sets and shuts up. Your coach, your rules.</p>
+    </section>
+
+    <hr class="sep">
+
+    <!-- privacy -->
+    <section class="section">
+      <h2>your data stays private</h2>
+      <p>AI coaching does not mean cloud storage. When you send a message, it is routed through a secure proxy to the AI provider. Nothing is stored on our servers. Your workout data never leaves your device — the AI sees only what you send in that conversation.</p>
+      <p>Read the full details in our <a href="privacy.html">privacy policy</a>.</p>
+    </section>
+
+    <hr class="sep">
+
+    <!-- pricing -->
+    <section class="section">
+      <h2>pricing</h2>
+      <p>The AI coach is part of Syntax Pro — $3.99/mo or $29.99/yr. The free tier includes unlimited workout logging with no ads. Pro unlocks AI coaching, personas, and more.</p>
+    </section>
+
+    <hr class="sep">
+
+    <!-- download CTA -->
+    <section class="closing">
+      <p class="closing-text">a coach that actually knows your training.</p>
+      <div class="closing-badges">
+        <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height:44px;">
+        </a>
+        <a href="https://play.google.com/apps/internaltest/4701061349251878084" target="_blank">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:64px;margin:-10px -12px;">
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div>&copy; 2026</div>
+    <div class="footer-links">
+      <a href="faq.html">faq</a>
+      <a href="compare.html">compare</a>
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+      <a href="support.html">support</a>
+      <a href="https://github.com/yuanjiadesu/syntax-site">github</a>
+    </div>
+  </footer>
+</body>
+</html>
