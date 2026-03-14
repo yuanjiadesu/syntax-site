@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Is Plain-Text Workout Tracking? — Syntax Fitness</title>
+  <meta name="description" content="Plain-text workout tracking saves every set as a markdown file you own. No proprietary database, no vendor lock-in. Your training data outlives any app.">
+  <link rel="canonical" href="https://syntax.fitness/plain-text-fitness.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syntax.fitness/plain-text-fitness.html">
+  <meta property="og:title" content="What Is Plain-Text Workout Tracking?">
+  <meta property="og:description" content="Save every set as a markdown file you own. No proprietary database, no vendor lock-in.">
+  <meta property="og:image" content="https://syntax.fitness/screen-workout.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What Is Plain-Text Workout Tracking?">
+  <meta name="twitter:description" content="Save every set as a markdown file you own. No proprietary database, no vendor lock-in.">
+  <meta name="twitter:image" content="https://syntax.fitness/screen-workout.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f0e8;
+      --surface: #eae4d9;
+      --line: #d4cdbf;
+      --ink-1: #1a1a1a;
+      --ink-2: #4a4540;
+      --ink-3: #8a8278;
+      --green: #1a8a42;
+      --green-dim: #e6f2ea;
+      --code-bg: #1c1c1c;
+      --code-ink: #d4d0c8;
+      --code-dim: #6b6560;
+      --code-green: #22c55e;
+      --code-line: #2e2e2e;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Newsreader', Georgia, serif;
+    }
+
+    body {
+      font-family: var(--mono);
+      background: var(--bg);
+      color: var(--ink-1);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* subtle paper texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* --- nav --- */
+    .nav {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink-2);
+      letter-spacing: 0.08em;
+    }
+    .nav-logo a { color: var(--ink-2); }
+    .nav-logo a:hover { text-decoration: none; }
+    .nav-links { display: flex; gap: 24px; font-size: 14px; }
+    .nav-links a { color: var(--ink-3); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink-2); text-decoration: none; }
+
+    /* --- main --- */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* --- page header --- */
+    .page-header {
+      padding: 64px 0 0;
+    }
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink-1);
+      letter-spacing: -0.02em;
+    }
+
+    /* --- sections --- */
+    .section {
+      padding: 56px 0 0;
+    }
+    .section h2 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink-1);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .section p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      max-width: 640px;
+    }
+    .section p + p {
+      margin-top: 12px;
+    }
+
+    /* --- code examples --- */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--code-line);
+      border-radius: 6px;
+      padding: 20px 24px;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--code-ink);
+      overflow-x: auto;
+    }
+    .code-block .h1 { color: #fff; font-weight: 500; }
+    .code-block .h2 { color: var(--code-green); font-weight: 500; }
+    .code-block .meta { color: var(--code-dim); }
+    .code-block .set { color: var(--code-ink); }
+    .code-caption {
+      font-size: 12px;
+      color: var(--ink-3);
+      margin-top: 8px;
+    }
+
+    /* --- why it matters --- */
+    .points {
+      margin-top: 24px;
+    }
+    .point {
+      margin-bottom: 16px;
+    }
+    .point strong {
+      display: block;
+      font-size: 14px;
+      color: var(--ink-1);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .point span {
+      font-size: 14px;
+      color: var(--ink-3);
+      line-height: 1.6;
+    }
+
+    /* --- divider --- */
+    .sep {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 56px 0 0;
+    }
+
+    /* --- cta --- */
+    .cta {
+      padding: 56px 0;
+      text-align: center;
+    }
+    .cta-text {
+      font-family: var(--serif);
+      font-size: 24px;
+      color: var(--ink-1);
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+    .cta-desc {
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.8;
+      max-width: 520px;
+      margin: 0 auto 24px;
+    }
+    .cta-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .cta-badges a {
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    /* --- footer --- */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 32px;
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--ink-3);
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--ink-3); font-size: 13px; }
+    .footer-links a:hover { color: var(--ink-2); }
+
+    /* --- responsive --- */
+    @media (max-width: 700px) {
+      .nav, .main, .footer { padding-left: 20px; padding-right: 20px; }
+      .page-header { padding-top: 40px; }
+      .examples-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer { flex-direction: column; gap: 12px; align-items: flex-start; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "What Is Plain-Text Workout Tracking?",
+    "url": "https://syntax.fitness/plain-text-fitness.html",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Syntax Fitness",
+      "url": "https://syntax.fitness"
+    }
+  }
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-logo"><a href="/">syntax</a></div>
+    <div class="nav-links">
+      <a href="faq.html">faq</a>
+      <a href="compare.html">compare</a>
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+      <a href="support.html">support</a>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <!-- header -->
+    <section class="page-header">
+      <h1>what is plain-text workout tracking?</h1>
+    </section>
+
+    <!-- the problem -->
+    <section class="section">
+      <h2>the problem</h2>
+      <p>most fitness apps lock your data in proprietary databases. years of training history — sets, reps, PRs, programs — trapped in a format only that app can read. if the company shuts down, pivots, or gets acquired, your data disappears with it.</p>
+      <p>you can't export it in a useful way. you can't search it with your own tools. you can't feed it to an AI agent or a spreadsheet without scraping and guessing. your training history is held hostage by whichever app you happened to start with.</p>
+    </section>
+
+    <!-- the idea -->
+    <section class="section">
+      <h2>the idea</h2>
+      <p>every workout is a markdown file. human-readable. machine-parseable. future-proof. your training data is just text files in a folder — the same format developers have used for decades to store notes, docs, and knowledge bases.</p>
+      <p>open a workout file in any text editor and you can read it instantly. no special software required. no proprietary viewer. no API key. just text.</p>
+    </section>
+
+    <!-- the format -->
+    <section class="section">
+      <h2>the format</h2>
+      <p>workouts, cardio imports, and routines all use the same simple markdown structure. headings for exercises, metadata as key-value pairs, sets as list items.</p>
+
+      <div class="examples-grid">
+        <div>
+          <div class="code-block"><span class="h1"># 2026-02-26 chest + arms day</span><br>
+<br>
+<span class="meta">duration: 57min</span><br>
+<span class="meta">source: syntax</span><br>
+<br>
+<span class="h2">## Barbell Row</span><br>
+<span class="set">- 60kg × 10</span><br>
+<span class="set">- 80kg × 5</span><br>
+<span class="set">- 80kg × 4</span><br>
+<br>
+<span class="h2">## Machine Fly</span><br>
+<span class="set">- 13.75kg × 12</span><br>
+<span class="set">- 13.75kg × 10</span></div>
+          <div class="code-caption">strength workout</div>
+        </div>
+        <div>
+          <div class="code-block"><span class="h1"># 2026-02-27 Run</span><br>
+<br>
+<span class="meta">type: run</span><br>
+<span class="meta">duration: 34min</span><br>
+<span class="meta">distance: 5.12km</span><br>
+<span class="meta">pace: 6:38/km</span><br>
+<span class="meta">calories: 386kcal</span><br>
+<span class="meta">avg_heart_rate: 135bpm</span><br>
+<br>
+<span class="meta">&gt; imported from Apple Health</span></div>
+          <div class="code-caption">cardio import</div>
+        </div>
+        <div>
+          <div class="code-block"><span class="h1"># Push Day A</span><br>
+<br>
+<span class="h2">## Bench Press</span><br>
+<span class="meta">sets: 4</span><br>
+<span class="meta">reps: 8-10</span><br>
+<br>
+<span class="h2">## Overhead Press</span><br>
+<span class="meta">sets: 3</span><br>
+<span class="meta">reps: 8-12</span><br>
+<br>
+<span class="h2">## Cable Fly</span><br>
+<span class="meta">sets: 3</span><br>
+<span class="meta">reps: 12-15</span></div>
+          <div class="code-caption">routine file</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- why it matters -->
+    <section class="section">
+      <h2>why it matters</h2>
+      <div class="points">
+        <div class="point">
+          <strong>portability</strong>
+          <span>move to any app, or no app at all. your data is files in a folder — drag, copy, sync however you want.</span>
+        </div>
+        <div class="point">
+          <strong>ai-readability</strong>
+          <span>feed your vault to any AI agent for analysis. plain text is the universal input format for language models.</span>
+        </div>
+        <div class="point">
+          <strong>longevity</strong>
+          <span>plain text outlives any app or company. markdown files written today will be readable in 50 years.</span>
+        </div>
+        <div class="point">
+          <strong>no vendor lock-in</strong>
+          <span>your data is yours, not the app's. if you leave, you take everything with you — no export button needed.</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="sep">
+
+    <!-- cta -->
+    <section class="cta">
+      <div class="cta-text">syntax is the app for this.</div>
+      <p class="cta-desc">a fast, minimal workout tracker that saves every set as a markdown file on your phone. built-in AI coach. no account, no cloud. free to log — pro unlocks AI and more.</p>
+      <div class="cta-badges">
+        <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height:44px;">
+        </a>
+        <a href="https://play.google.com/apps/internaltest/4701061349251878084" target="_blank">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:64px;margin:-10px -12px;">
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div>&copy; 2026</div>
+    <div class="footer-links">
+      <a href="faq.html">faq</a>
+      <a href="compare.html">compare</a>
+      <a href="privacy.html">privacy</a>
+      <a href="terms.html">terms</a>
+      <a href="support.html">support</a>
+      <a href="https://github.com/yuanjiadesu/syntax-site">github</a>
+    </div>
+  </footer>
+</body>
+</html>
