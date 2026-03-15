@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 健身教练 — Syntax 如何用 AI 规划你的训练</title>
+  <meta name="description" content="Syntax 的 AI 教练会阅读你的训练历史，为你编写个性化训练计划。不是模板引擎，而是真正了解你训练的对话式 AI。">
+  <link rel="canonical" href="https://syntax.fitness/zh/ai-coach.html">
+  <link rel="alternate" hreflang="en" href="https://syntax.fitness/ai-coach.html">
+  <link rel="alternate" hreflang="zh" href="https://syntax.fitness/zh/ai-coach.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syntax.fitness/zh/ai-coach.html">
+  <meta property="og:title" content="AI 健身教练 — Syntax 如何用 AI 规划你的训练">
+  <meta property="og:description" content="一个对话式 AI，能读取你的训练历史并编写真正的训练计划——而非模板。">
+  <meta property="og:image" content="https://syntax.fitness/screen-ai.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI 健身教练 — Syntax Fitness">
+  <meta name="twitter:description" content="一个对话式 AI，能读取你的训练历史并编写真正的训练计划——而非模板。">
+  <meta name="twitter:image" content="https://syntax.fitness/screen-ai.png">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=1">
+  <script src="../site.js" defer></script>
+  <style>
+    /* --- main --- */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* --- page header --- */
+    .page-header {
+      padding: 64px 0 0;
+    }
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink-1);
+      letter-spacing: -0.02em;
+    }
+
+    /* --- content sections --- */
+    .section {
+      padding: 56px 0;
+    }
+    .section h2 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink-1);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .section p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      max-width: 640px;
+    }
+    .section p + p {
+      margin-top: 12px;
+    }
+
+    /* --- flow list --- */
+    .flow-list {
+      list-style: none;
+      margin: 20px 0 0;
+      max-width: 640px;
+    }
+    .flow-list li {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      padding: 6px 0 6px 24px;
+      position: relative;
+    }
+    .flow-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* --- phone frame --- */
+    .phone-frame {
+      width: 200px;
+      background: #1a1a1a;
+      border-radius: 36px;
+      padding: 5px;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.15),
+        0 4px 16px rgba(0,0,0,0.08);
+    }
+    .phone-frame img {
+      width: 100%;
+      border-radius: 32px;
+      display: block;
+    }
+
+    /* --- dual phones --- */
+    .phones-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    .phone-col {
+      text-align: center;
+    }
+    .phone-caption {
+      font-size: 12px;
+      color: var(--ink-3);
+      margin-top: 12px;
+    }
+
+    /* --- points --- */
+    .points { margin-top: 24px; }
+    .point { margin-bottom: 12px; }
+    .point strong {
+      display: inline;
+      font-size: 14px;
+      color: var(--ink-1);
+      font-weight: 600;
+    }
+    .point span {
+      font-size: 14px;
+      color: var(--ink-3);
+      line-height: 1.6;
+    }
+    .point strong::after { content: ' — '; font-weight: 400; color: var(--ink-3); }
+
+    /* --- divider --- */
+    .sep {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 0;
+    }
+
+    /* --- closing --- */
+    .closing {
+      padding: 40px 0 56px;
+      text-align: center;
+    }
+    .closing-text {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink-2);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .closing-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .closing-badges a {
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    /* --- responsive --- */
+    @media (max-width: 700px) {
+      .page-header { padding-top: 40px; }
+      .phones-row {
+        gap: 16px;
+      }
+      .phone-frame {
+        width: 160px;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "AI 教练如何运作",
+    "url": "https://syntax.fitness/zh/ai-coach.html",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Syntax Fitness",
+      "url": "https://syntax.fitness"
+    }
+  }
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">syntax</a>
+    <div class="nav-menu" id="nav-menu">
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">功能</button>
+        <div class="nav-dropdown">
+          <a href="ai-coach.html" class="active">AI 教练</a>
+          <a href="plain-text-fitness.html">纯文本健身</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">资源</button>
+        <div class="nav-dropdown">
+          <a href="faq.html">常见问题</a>
+          <a href="compare.html">对比</a>
+          <a href="support.html">支持</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">法律</button>
+        <div class="nav-dropdown">
+          <a href="privacy.html">隐私</a>
+          <a href="terms.html">条款</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+      <div class="nav-lang"><a href="../ai-coach.html">EN</a> / <span>中文</span></div>
+      <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" class="nav-cta" target="_blank" rel="noopener">下载</a>
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="main">
+
+    <!-- page header -->
+    <section class="page-header">
+      <h1>AI 教练如何运作</h1>
+    </section>
+
+    <hr class="sep" style="margin-top:40px;">
+
+    <!-- not a template engine -->
+    <section class="section">
+      <h2>不是模板引擎</h2>
+      <p>Syntax 的 AI 教练是一个对话式 AI，能读取你真实的训练历史——每一组、每个动作、每次训练。它了解你可用的器械、近期训练量和目标。当它编写训练计划时，写出的是真正属于你的计划。</p>
+    </section>
+
+    <hr class="sep">
+
+    <!-- how it works -->
+    <section class="section">
+      <h2>运作方式</h2>
+      <ul class="flow-list">
+        <li>用自然语言告诉它你的需求——"给我安排一个 30 分钟的腿部训练"或"上肢推的动作，今天只有哑铃"</li>
+        <li>它会读取你的训练历史并了解你的器械</li>
+        <li>它用 markdown 格式编写结构化训练计划——热身组、正式组、RPE 目标、休息建议</li>
+        <li>你点击即可立即开始训练</li>
+      </ul>
+
+      <div class="phones-row">
+        <div class="phone-col">
+          <div class="phone-frame">
+            <img src="../screen-ai-ask.png" alt="用自然语言向 AI 教练请求训练计划">
+          </div>
+          <div class="phone-caption">用自然语言提问</div>
+        </div>
+        <div class="phone-col">
+          <div class="phone-frame">
+            <img src="../screen-ai.png" alt="AI 教练回复的结构化训练计划">
+          </div>
+          <div class="phone-caption">获得结构化训练计划</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="sep">
+
+    <!-- personas -->
+    <section class="section">
+      <h2>六种教练风格</h2>
+      <p>选择最能激励你训练的风格，随时可以切换。</p>
+      <div class="points" style="margin-top:24px;">
+        <div class="point"><strong>默认教练</strong> <span>均衡、以数据为基础的指导</span></div>
+        <div class="point"><strong>铁血教官</strong> <span>严厉督促，没有借口</span></div>
+        <div class="point"><strong>禅宗大师</strong> <span>平和、专注、重视恢复</span></div>
+        <div class="point"><strong>数据狂人</strong> <span>痴迷数据，精于分析</span></div>
+        <div class="point"><strong>能量炸弹</strong> <span>充满激情，全力鼓舞</span></div>
+        <div class="point"><strong>运动科学家</strong> <span>循证训练，引用研究</span></div>
+      </div>
+      <p style="margin-top:16px;">你也可以直接编辑 <code style="font-size:14px; background:var(--surface-1); padding:2px 6px; border-radius:3px;">coach.md</code> 来完全自定义教练风格——重写系统提示词、改变训练理念，让它完全成为你自己的教练。</p>
+
+      <div class="phones-row">
+        <div class="phone-col">
+          <div class="phone-frame">
+            <img src="../screen-ai-persona.png" alt="六种教练风格选择器">
+          </div>
+          <div class="phone-caption">选择教练风格</div>
+        </div>
+        <div class="phone-col">
+          <div class="phone-frame">
+            <img src="../screen-ai-coach-md.png" alt="可编辑的 coach.md 系统提示词">
+          </div>
+          <div class="phone-caption">或直接编辑 coach.md</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="sep">
+
+    <!-- memory -->
+    <section class="section">
+      <h2>教练记忆</h2>
+      <p>AI 教练会跨对话记住你。你的个人资料、训练偏好、伤病情况、目标和训练模式都存储在手机上的 <code style="font-size:14px; background:var(--surface-1); padding:2px 6px; border-radius:3px;">memory.md</code> 文件中——纯文本，完全可编辑。</p>
+      <p>教练会随着时间推移逐渐了解你的情况，无需你反复说明。而且因为它是一个 markdown 文件，你可以阅读、编辑或删除它记住的任何内容。</p>
+
+      <div class="phones-row">
+        <div class="phone-col">
+          <div class="phone-frame">
+            <img src="../screen-ai-memory.png" alt="AI 记忆文件，显示用户资料、偏好和目标">
+          </div>
+          <div class="phone-caption">memory.md — 完全可编辑</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="sep">
+
+    <!-- privacy -->
+    <section class="section">
+      <h2>你的数据保持私密</h2>
+      <p>AI 教练不等于云存储。当你发送消息时，它通过安全代理路由到 AI 提供商。我们的服务器上不会存储任何内容。你的训练数据永远不会离开你的设备——AI 只能看到你在当次对话中发送的内容。</p>
+      <p>详细信息请阅读我们的<a href="privacy.html">隐私政策</a>。</p>
+    </section>
+
+    <hr class="sep">
+
+    <!-- pricing -->
+    <section class="section">
+      <h2>价格</h2>
+      <p>AI 教练是 Syntax Pro 的一部分——每月 $3.99 或每年 $29.99。免费版包含无限训练记录且无广告。Pro 版解锁 AI 教练、教练风格等更多功能。</p>
+    </section>
+
+    <hr class="sep">
+
+    <!-- download CTA -->
+    <section class="closing">
+      <p class="closing-text">一个真正了解你训练的教练。</p>
+      <div class="closing-badges">
+        <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank" rel="noopener">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height:44px;">
+        </a>
+        <a href="https://play.google.com/apps/internaltest/4701061349251878084" target="_blank" rel="noopener">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:64px;margin:-10px -12px;">
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">&copy; 2026 Syntax</footer>
+</body>
+</html>

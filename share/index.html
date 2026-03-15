@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shared Routine — Syntax</title>
   <meta name="description" content="Someone shared a workout routine with you on Syntax.">
+  <link rel="canonical" href="https://syntax.fitness/share/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syntax.fitness/share/">
+  <meta property="og:title" content="Shared Routine — Syntax Fitness">
+  <meta property="og:description" content="Someone shared a workout routine with you on Syntax. Open to start training.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Shared Routine — Syntax Fitness">
+  <meta name="twitter:description" content="Someone shared a workout routine with you on Syntax. Open to start training.">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -104,6 +112,36 @@
     }
     .error a { color: var(--green); }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Shared Routine",
+    "url": "https://syntax.fitness/share/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Syntax Fitness",
+      "url": "https://syntax.fitness"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Syntax",
+          "item": "https://syntax.fitness/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Share",
+          "item": "https://syntax.fitness/share/"
+        }
+      ]
+    }
+  }
+  </script>
 </head>
 <body>
   <div class="card" id="content">
@@ -117,7 +155,7 @@
       var params = new URLSearchParams(window.location.search);
       var encoded = params.get('r');
 
-      if (!encoded) {
+      if (!encoded || !/^[A-Za-z0-9_\-=]+$/.test(encoded)) {
         container.innerHTML = '<p class="error">Invalid share link.<br><a href="/">Go to Syntax</a></p>';
         return;
       }
@@ -128,7 +166,12 @@
         while (b64.length % 4) b64 += '=';
         var json = decodeURIComponent(escape(atob(b64)));
         var data = JSON.parse(json);
-        if (!data.e || !Array.isArray(data.e)) throw new Error('bad');
+        if (
+          !data ||
+          !Array.isArray(data.e) ||
+          !data.e.every(function (ex) { return typeof ex === 'string'; }) ||
+          (data.n != null && typeof data.n !== 'string')
+        ) throw new Error('bad');
       } catch (e) {
         container.innerHTML = '<p class="error">This share link is broken or incomplete.<br><a href="/">Go to Syntax</a></p>';
         return;
