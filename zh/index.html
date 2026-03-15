@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syntax — 纯文本训练记录器</title>
+  <meta name="description" content="一款快速、极简的训练记录器，将你的训练数据以纯文本保存。无需注册账户，无需云端，数据完全留在你的手机上。">
+  <link rel="canonical" href="https://syntax.fitness/zh/">
+  <link rel="alternate" hreflang="en" href="https://syntax.fitness/">
+  <link rel="alternate" hreflang="zh" href="https://syntax.fitness/zh/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syntax.fitness/zh/">
+  <meta property="og:title" content="Syntax — 纯文本训练记录器，内置 AI 教练">
+  <meta property="og:description" content="一款快速、极简的训练记录器，每一组都以纯文本保存。内置 AI 教练。无需账户，无需云端，数据留在你的手机上。">
+  <meta property="og:image" content="https://syntax.fitness/screen-workout.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syntax — 纯文本训练记录器，内置 AI 教练">
+  <meta name="twitter:description" content="一款快速、极简的训练记录器，每一组都以纯文本保存。内置 AI 教练。无需账户，无需云端，数据留在你的手机上。">
+  <meta name="twitter:image" content="https://syntax.fitness/screen-workout.png">
+
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=1">
+  <script src="../site.js" defer></script>
+  <style>
+    /* code blocks — always dark */
+    .vault-tree, .vault-example {
+      --code-bg: #1c1c1c;
+      --code-ink: #d4d0c8;
+      --code-dim: #6b6560;
+      --code-green: #22c55e;
+      --code-line: #2e2e2e;
+    }
+
+    /* --- main --- */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* --- hero --- */
+    .hero {
+      padding: 64px 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-text h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink-1);
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero-desc {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      margin-bottom: 32px;
+    }
+    .hero-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .hero-badges a {
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .hero-sub {
+      font-size: 13px;
+      color: var(--ink-3);
+      margin-top: 12px;
+    }
+
+    /* --- phone mockup --- */
+    .phone-frame {
+      width: 240px;
+      background: #1a1a1a;
+      border-radius: 36px;
+      padding: 5px;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.15),
+        0 4px 16px rgba(0,0,0,0.08);
+    }
+    .phone-frame img {
+      width: 100%;
+      border-radius: 32px;
+      display: block;
+    }
+
+    /* --- narrative sections --- */
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      padding: 80px 0;
+    }
+    .story + .story {
+      padding-top: 0;
+    }
+    .story-phone {
+      display: flex;
+      justify-content: center;
+    }
+    .story-text {
+      max-width: 380px;
+    }
+    .story-step {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .story-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink-1);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .story-text p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+    }
+    .story-text p + p {
+      margin-top: 12px;
+    }
+
+    /* flip: phone on left, text on right */
+    .story--flip .story-phone { order: -1; }
+
+    /* --- divider --- */
+    .sep {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 0;
+    }
+
+    /* --- dual phone showcase --- */
+    .dual {
+      padding: 80px 0;
+      text-align: center;
+    }
+    .dual-header {
+      max-width: 520px;
+      margin: 0 auto 40px;
+    }
+    .dual-step {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .dual-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink-1);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .dual-header p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+    }
+    .dual-phones {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+    }
+    .dual-phones .phone-frame {
+      width: 200px;
+    }
+    .dual-caption {
+      font-size: 12px;
+      color: var(--ink-3);
+      margin-top: 12px;
+    }
+
+    /* --- vault --- */
+    .vault {
+      padding: 80px 0;
+    }
+    .vault-step {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .vault-header {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink-1);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .vault-desc {
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.8;
+      margin-bottom: 32px;
+      max-width: 640px;
+    }
+    .vault-tree {
+      background: var(--code-bg);
+      border: 1px solid var(--code-line);
+      border-radius: 6px;
+      padding: 20px 24px;
+      font-size: 13px;
+      line-height: 2;
+      color: var(--code-ink);
+      overflow-x: auto;
+      margin-bottom: 24px;
+    }
+    .vault-tree .dir { color: var(--code-green); }
+    .vault-tree .file { color: var(--code-ink); }
+    .vault-tree .dim { color: var(--code-dim); }
+    .vault-examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .vault-example {
+      background: var(--code-bg);
+      border: 1px solid var(--code-line);
+      border-radius: 6px;
+      padding: 20px 24px;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--code-ink);
+      overflow-x: auto;
+    }
+    .vault-example .h1 { color: #fff; font-weight: 500; }
+    .vault-example .h2 { color: var(--code-green); font-weight: 500; }
+    .vault-example .meta { color: var(--code-dim); }
+    .vault-example .set { color: var(--code-ink); }
+    .vault-caption {
+      font-size: 12px;
+      color: var(--ink-3);
+      margin-top: 8px;
+    }
+
+    /* --- features --- */
+    .features {
+      padding: 0 0 80px;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 48px;
+    }
+    .feature-item strong {
+      display: block;
+      font-size: 14px;
+      color: var(--ink-1);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .feature-item span {
+      font-size: 14px;
+      color: var(--ink-3);
+      line-height: 1.6;
+    }
+
+    /* --- closing --- */
+    .closing {
+      padding: 40px 0 56px;
+      text-align: center;
+    }
+    .closing-text {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink-2);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .closing-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .closing-badges a {
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    /* --- responsive --- */
+    @media (max-width: 700px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding-top: 40px;
+      }
+      .hero .story-phone { order: -1; }
+      .phone-frame { width: 200px; }
+      .story {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 56px 0;
+      }
+      .story + .story { padding-top: 0; }
+      .story-phone { order: -1 !important; }
+      .story-text { max-width: none; }
+      .dual-phones {
+        gap: 16px;
+      }
+      .dual-phones .phone-frame {
+        width: 160px;
+      }
+      .vault-examples {
+        grid-template-columns: 1fr;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Syntax Fitness",
+    "operatingSystem": ["iOS", "Android"],
+    "applicationCategory": "HealthApplication",
+    "description": "一款纯文本训练记录器，内置 AI 教练。每一组都以 markdown 保存。无需账户，无需云端，无追踪。",
+    "url": "https://syntax.fitness",
+    "screenshot": [
+      "https://syntax.fitness/screen-workout.png",
+      "https://syntax.fitness/screen-ai-ask.png",
+      "https://syntax.fitness/screen-ai.png",
+      "https://syntax.fitness/screen-train.png",
+      "https://syntax.fitness/screen-exercises.png",
+      "https://syntax.fitness/screen-exercise-new.png"
+    ],
+    "offers": [
+      {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "免费 — 无限训练记录"
+      },
+      {
+        "@type": "Offer",
+        "price": "3.99",
+        "priceCurrency": "USD",
+        "description": "Pro 月度 — AI 教练及更多功能",
+        "priceValidUntil": "2027-12-31"
+      },
+      {
+        "@type": "Offer",
+        "price": "29.99",
+        "priceCurrency": "USD",
+        "description": "Pro 年度 — AI 教练及更多功能",
+        "priceValidUntil": "2027-12-31"
+      }
+    ],
+    "downloadUrl": [
+      "https://apps.apple.com/gb/app/syntax-fitness/id6759859329",
+      "https://play.google.com/apps/internaltest/4701061349251878084"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "Syntax",
+      "url": "https://syntax.fitness",
+      "sameAs": [
+        "https://github.com/yuanjiadesu/syntax-site",
+        "https://apps.apple.com/gb/app/syntax-fitness/id6759859329",
+        "https://www.reddit.com/r/smartfitness/comments/1rt6k18/i_built_a_plain_text_workout_tracker_thats_ai/",
+        "https://www.superlinear.academy/c/share-your-projects/ai-917755"
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">syntax</a>
+    <div class="nav-menu" id="nav-menu">
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">功能</button>
+        <div class="nav-dropdown" role="menu">
+          <a href="ai-coach.html" role="menuitem">AI 教练</a>
+          <a href="plain-text-fitness.html" role="menuitem">纯文本健身</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">资源</button>
+        <div class="nav-dropdown" role="menu">
+          <a href="faq.html" role="menuitem">常见问题</a>
+          <a href="compare.html" role="menuitem">对比</a>
+          <a href="support.html" role="menuitem">支持</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">法律</button>
+        <div class="nav-dropdown" role="menu">
+          <a href="privacy.html" role="menuitem">隐私</a>
+          <a href="terms.html" role="menuitem">条款</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+      <div class="nav-lang"><a href="../index.html">EN</a> / <span>中文</span></div>
+      <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" class="nav-cta" target="_blank">下载</a>
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="main">
+
+    <!-- hero -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>训练。记录。<br><span style="color:var(--accent)">掌握你的数据。</span></h1>
+        <p class="hero-desc">
+          一款纯文本训练记录器，内置 AI 教练。每一组都以 markdown 保存。无需账户，无需云端，无追踪。
+        </p>
+        <div class="hero-badges">
+          <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank">
+            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="在 App Store 下载" style="height:44px;">
+          </a>
+          <a href="https://play.google.com/apps/internaltest/4701061349251878084" target="_blank">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="在 Google Play 下载" style="height:64px;margin:-10px -12px;">
+          </a>
+        </div>
+        <p class="hero-sub">免费记录。Pro 解锁 AI 及更多功能。</p>
+      </div>
+      <div class="story-phone">
+        <div class="phone-frame">
+          <img src="../screen-workout.png" alt="Syntax 训练界面，快速记录与休息计时">
+        </div>
+      </div>
+    </section>
+
+    <hr class="sep" style="margin-top:80px;">
+
+    <!-- narrative 1: ask -->
+    <section class="story">
+      <div class="story-text">
+        <div class="story-step">01 — 提问</div>
+        <h2>告诉它你需要什么</h2>
+        <p>"给我一个 30 分钟的腿部训练。" AI 教练会阅读你的历史记录，了解你的器材，然后编写一个真正的训练计划——而不是通用模板。</p>
+        <p>选择一种人格。热血型会为你呐喊加油。沉稳型只给你组数，然后闭嘴。</p>
+      </div>
+      <div class="story-phone">
+        <div class="phone-frame">
+          <img src="../screen-ai-ask.png" alt="向 AI 教练提问腿部训练计划">
+        </div>
+      </div>
+    </section>
+
+    <!-- narrative 2: plan -->
+    <section class="story story--flip">
+      <div class="story-text">
+        <div class="story-step">02 — 计划</div>
+        <h2>获取结构化训练方案</h2>
+        <p>AI 以 markdown 格式回复——与你的训练记录完全相同的格式。热身组、正式组、RPE 目标、休息指导。一键开始训练。</p>
+      </div>
+      <div class="story-phone">
+        <div class="phone-frame">
+          <img src="../screen-ai.png" alt="AI 教练回复的结构化腿部训练计划">
+        </div>
+      </div>
+    </section>
+
+    <!-- narrative 3: train -->
+    <section class="story">
+      <div class="story-text">
+        <div class="story-step">03 — 训练</div>
+        <h2>记录组数，而非操作菜单</h2>
+        <p>训练界面不会打扰你。点击记录一组，或者自然输入——<code>Bench 80 5 5</code> 即记录 80kg 卧推 5 次 5 组。休息计时自动开始。</p>
+        <p>你的计划进度显示在顶部。左右滑动切换动作。</p>
+      </div>
+      <div class="story-phone">
+        <div class="phone-frame">
+          <img src="../screen-train.png" alt="训练中界面，显示计划进度和组数记录">
+        </div>
+      </div>
+    </section>
+
+    <hr class="sep">
+
+    <!-- dual: exercises -->
+    <section class="dual">
+      <div class="dual-header">
+        <div class="dual-step">动作库</div>
+        <h2>内置 200+ 动作，也可自创。</h2>
+        <p>每个动作都有肌群目标、器材标签、演示视频和相似动作。找不到？输入名称，让 AI 填充细节，或自行配置。</p>
+      </div>
+      <div class="dual-phones">
+        <div>
+          <div class="phone-frame">
+            <img src="../screen-exercises.png" alt="动作详情页面，含演示视频">
+          </div>
+          <div class="dual-caption">卧推详情</div>
+        </div>
+        <div>
+          <div class="phone-frame">
+            <img src="../screen-exercise-new.png" alt="用 AI 创建新动作">
+          </div>
+          <div class="dual-caption">用 AI 创建</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="sep">
+
+    <!-- vault -->
+    <section class="vault">
+      <div class="vault-step">你的数据</div>
+      <div class="vault-header">纯文本，而非数据库</div>
+      <p class="vault-desc">
+        你的训练数据保存在手机上的一个文件夹中。每次训练就是一个 markdown 文件。训练计划、动作——全是纯文本。你可以在"文件"应用中打开它们，随意备份，或者把整个文件夹交给你喜欢的 AI 工具。
+      </p>
+
+      <div class="vault-tree"><span class="dir">syntax-vault/</span><br>
+├── <span class="dir">workouts/</span><br>
+│   ├── <span class="file">2026-02-26_211305.workout.md</span><br>
+│   ├── <span class="file">2026-02-25_180254.workout.md</span><br>
+│   └── <span class="dim">...</span><br>
+├── <span class="dir">programs/</span><br>
+│   ├── <span class="file">push-day-a.md</span><br>
+│   └── <span class="file">legs-+-core-day.md</span><br>
+├── <span class="file">exercises.json</span><br>
+├── <span class="file">body.md</span><br>
+└── <span class="file">preferences.md</span></div>
+
+      <div class="vault-examples">
+        <div>
+          <div class="vault-example"><span class="h1"># 2026-02-26 chest + arms day</span><br>
+<br>
+<span class="meta">duration: 57min</span><br>
+<span class="meta">source: syntax</span><br>
+<br>
+<span class="h2">## Barbell Row</span><br>
+<span class="set">- 60kg × 10</span><br>
+<span class="set">- 80kg × 5</span><br>
+<span class="set">- 80kg × 4</span><br>
+<br>
+<span class="h2">## Machine Fly</span><br>
+<span class="set">- 13.75kg × 12</span><br>
+<span class="set">- 13.75kg × 10</span></div>
+          <div class="vault-caption">力量训练</div>
+        </div>
+        <div>
+          <div class="vault-example"><span class="h1"># 2026-02-27 Run</span><br>
+<br>
+<span class="meta">type: run</span><br>
+<span class="meta">duration: 34min</span><br>
+<span class="meta">distance: 5.12km</span><br>
+<span class="meta">pace: 6:38/km</span><br>
+<span class="meta">calories: 386kcal</span><br>
+<span class="meta">avg_heart_rate: 135bpm</span><br>
+<br>
+<span class="dim">&gt; imported from Apple Health</span></div>
+          <div class="vault-caption">有氧导入</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="sep">
+
+    <!-- features -->
+    <section class="features">
+      <div class="feature-grid" style="padding-top: 56px;">
+        <div class="feature-item">
+          <strong>Apple Health 同步</strong>
+          <span>自动导入跑步、步行和骑行数据。有氧和力量训练，一处管理。</span>
+        </div>
+        <div class="feature-item">
+          <strong>本地优先</strong>
+          <span>一切都在你的手机上。无服务器，无云同步，无数据分析。</span>
+        </div>
+        <div class="feature-item">
+          <strong>分享训练计划</strong>
+          <span>发送一个链接。你的朋友打开就能开始训练——无需注册。</span>
+        </div>
+        <div class="feature-item">
+          <strong>诚实定价</strong>
+          <span>无限记录，免费。无广告。Pro 增加 AI 教练及更多功能——$3.99/月 或 $29.99/年。</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- closing CTA -->
+    <section class="closing">
+      <p class="closing-text">你的训练数据，应该比任何应用都长久。</p>
+      <div class="closing-badges">
+        <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="在 App Store 下载" style="height:44px;">
+        </a>
+        <a href="https://play.google.com/apps/internaltest/4701061349251878084" target="_blank">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="在 Google Play 下载" style="height:64px;margin:-10px -12px;">
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">&copy; 2026 Syntax</footer>
+</body>
+</html>

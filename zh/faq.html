@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>常见问题 — Syntax Fitness</title>
+  <meta name="description" content="关于 Syntax Fitness 的常见问题。免费纯文本训练记录器，内置 AI 教练。无需注册，离线优先，数据留在你的手机上。">
+  <link rel="canonical" href="https://syntax.fitness/zh/faq.html">
+  <link rel="alternate" hreflang="en" href="https://syntax.fitness/faq.html">
+  <link rel="alternate" hreflang="zh" href="https://syntax.fitness/zh/faq.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syntax.fitness/zh/faq.html">
+  <meta property="og:title" content="常见问题 — Syntax Fitness | 纯文本训练记录器">
+  <meta property="og:description" content="关于 Syntax 你需要知道的一切——定价、隐私、数据格式、AI 教练等。">
+  <meta property="og:image" content="https://syntax.fitness/screen-workout.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="常见问题 — Syntax Fitness">
+  <meta name="twitter:description" content="关于 Syntax 你需要知道的一切——定价、隐私、数据格式、AI 教练等。">
+  <meta name="twitter:image" content="https://syntax.fitness/screen-workout.png">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=1">
+  <script src="../site.js" defer></script>
+  <style>
+    /* --- main --- */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* --- page header --- */
+    .page-header {
+      padding: 64px 0 48px;
+    }
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink-1);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .page-header p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      max-width: 640px;
+    }
+
+    /* --- faq --- */
+    .faq-list {
+      padding-bottom: 40px;
+    }
+    .faq-list details {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-list details:first-child {
+      border-top: 1px solid var(--line);
+    }
+    .faq-list summary {
+      padding: 20px 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink-1);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after {
+      content: '+';
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--ink-3);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-list details[open] summary::after {
+      content: '\2212';
+    }
+    .faq-list details p {
+      padding: 0 0 20px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-2);
+      max-width: 720px;
+    }
+
+    /* --- closing --- */
+    .closing {
+      padding: 40px 0 56px;
+      text-align: center;
+    }
+    .closing-text {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink-2);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .closing-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .closing-badges a {
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    /* --- divider --- */
+    .sep {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 0;
+    }
+
+    /* --- responsive --- */
+    @media (max-width: 700px) {
+      .main { padding-left: 20px; padding-right: 20px; }
+      .page-header { padding: 40px 0 32px; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Syntax 是什么？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Syntax 是一款纯文本训练记录器，内置 AI 教练。每一组训练都以 Markdown 文件的形式保存在你的手机上。无需注册，无需云同步，无任何追踪。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Syntax 免费吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "是的。无限训练记录完全免费，没有广告。Syntax Pro（$3.99/月 或 $29.99/年）可解锁 AI 教练、Apple Health 同步等更多功能。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "可以离线使用吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "可以。Syntax 完全支持离线使用，所有数据存储在你的设备上。唯一需要联网的功能是 AI 教练。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "需要注册账号吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "不需要。没有账号、没有注册流程、不需要邮箱。打开应用即可开始记录。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "训练数据以什么格式保存？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "纯 Markdown (.md) 文件。每次训练都是一个人类可读的文本文件，你可以用任何文本编辑器打开，随意备份，或者交给 AI 代理处理。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "可以导出数据吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "可以。你的训练记录就是手机上文件夹中的文件。通过文件 App（iOS）或文件管理器（Android）即可访问。不需要导出按钮——文件本来就是你的。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "可以同步 Apple Health 吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "可以。Syntax 从 Apple Health 导入跑步、步行和骑行数据，并将力量训练写回。所有训练数据汇聚一处。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "AI 教练是如何工作的？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "告诉它你的需求，它会读取你的训练历史、了解你的器材，并编写结构化的训练计划。选择一个风格——热血型或沉稳型。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "我的数据隐私有保障吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "有。Syntax 没有服务器、没有数据分析、没有追踪。你的数据不会离开你的设备，除非你使用可选的 AI 教练功能——该功能的消息传输是加密的。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Syntax 和 Strong、Hevy、Fitbod 有什么不同？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Syntax 将数据存储为你拥有的纯文本，而非专有数据库。它是本地优先的，无需注册。AI 教练编写对话式训练计划，而不是算法生成的模板。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "支持 Android 吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "支持。Syntax 在 iOS（App Store）和 Android（Google Play）上均可下载。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "可以和朋友分享训练计划吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "可以。发送一个链接，你的朋友打开就能开始训练——无需注册。"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">syntax</a>
+    <div class="nav-menu" id="nav-menu">
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">功能</button>
+        <div class="nav-dropdown" role="menu">
+          <a href="ai-coach.html" role="menuitem">AI 教练</a>
+          <a href="plain-text-fitness.html" role="menuitem">纯文本健身</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">资源</button>
+        <div class="nav-dropdown" role="menu">
+          <a href="faq.html" role="menuitem" class="active">常见问题</a>
+          <a href="compare.html" role="menuitem">对比</a>
+          <a href="support.html" role="menuitem">支持</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">法律</button>
+        <div class="nav-dropdown" role="menu">
+          <a href="privacy.html" role="menuitem">隐私</a>
+          <a href="terms.html" role="menuitem">条款</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+      <div class="nav-lang"><a href="../faq.html">EN</a> / <span>中文</span></div>
+      <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" class="nav-cta" target="_blank">下载</a>
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="main">
+
+    <section class="page-header">
+      <h1>常见问题</h1>
+      <p>关于 Syntax 你需要知道的一切——定价、隐私、数据格式、AI 教练等。</p>
+    </section>
+
+    <div class="faq-list">
+      <details>
+        <summary>Syntax 是什么？</summary>
+        <p>Syntax 是一款纯文本训练记录器，内置 AI 教练。每一组训练都以 Markdown 文件的形式保存在你的手机上。无需注册，无需云同步，无任何追踪。</p>
+      </details>
+
+      <details>
+        <summary>Syntax 免费吗？</summary>
+        <p>是的。无限训练记录完全免费，没有广告。Syntax Pro（$3.99/月 或 $29.99/年）可解锁 AI 教练、Apple Health 同步等更多功能。</p>
+      </details>
+
+      <details>
+        <summary>可以离线使用吗？</summary>
+        <p>可以。Syntax 完全支持离线使用，所有数据存储在你的设备上。唯一需要联网的功能是 AI 教练。</p>
+      </details>
+
+      <details>
+        <summary>需要注册账号吗？</summary>
+        <p>不需要。没有账号、没有注册流程、不需要邮箱。打开应用即可开始记录。</p>
+      </details>
+
+      <details>
+        <summary>训练数据以什么格式保存？</summary>
+        <p>纯 Markdown (.md) 文件。每次训练都是一个人类可读的文本文件，你可以用任何文本编辑器打开，随意备份，或者交给 AI 代理处理。</p>
+      </details>
+
+      <details>
+        <summary>可以导出数据吗？</summary>
+        <p>可以。你的训练记录就是手机上文件夹中的文件。通过文件 App（iOS）或文件管理器（Android）即可访问。不需要导出按钮——文件本来就是你的。</p>
+      </details>
+
+      <details>
+        <summary>可以同步 Apple Health 吗？</summary>
+        <p>可以。Syntax 从 Apple Health 导入跑步、步行和骑行数据，并将力量训练写回。所有训练数据汇聚一处。</p>
+      </details>
+
+      <details>
+        <summary>AI 教练是如何工作的？</summary>
+        <p>告诉它你的需求，它会读取你的训练历史、了解你的器材，并编写结构化的训练计划。选择一个风格——热血型或沉稳型。<a href="ai-coach.html">了解更多</a></p>
+      </details>
+
+      <details>
+        <summary>我的数据隐私有保障吗？</summary>
+        <p>有。Syntax 没有服务器、没有数据分析、没有追踪。你的数据不会离开你的设备，除非你使用可选的 AI 教练功能——该功能的消息传输是加密的。<a href="privacy.html">阅读隐私政策</a></p>
+      </details>
+
+      <details>
+        <summary>Syntax 和 Strong、Hevy、Fitbod 有什么不同？</summary>
+        <p>Syntax 将数据存储为你拥有的纯文本，而非专有数据库。它是本地优先的，无需注册。AI 教练编写对话式训练计划，而不是算法生成的模板。<a href="compare.html">查看对比</a></p>
+      </details>
+
+      <details>
+        <summary>支持 Android 吗？</summary>
+        <p>支持。Syntax 在 iOS（App Store）和 Android（Google Play）上均可下载。</p>
+      </details>
+
+      <details>
+        <summary>可以和朋友分享训练计划吗？</summary>
+        <p>可以。发送一个链接，你的朋友打开就能开始训练——无需注册。</p>
+      </details>
+    </div>
+
+    <hr class="sep">
+
+    <section class="closing">
+      <p class="closing-text">你的训练数据，应该比任何应用都长久。</p>
+      <div class="closing-badges">
+        <a href="https://apps.apple.com/gb/app/syntax-fitness/id6759859329" target="_blank">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="在 App Store 下载" style="height:44px;">
+        </a>
+        <a href="https://play.google.com/apps/internaltest/4701061349251878084" target="_blank">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="在 Google Play 下载" style="height:64px;margin:-10px -12px;">
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">&copy; 2026 Syntax</footer>
+</body>
+</html>
