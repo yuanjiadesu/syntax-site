@@ -166,7 +166,12 @@
         while (b64.length % 4) b64 += '=';
         var json = decodeURIComponent(escape(atob(b64)));
         var data = JSON.parse(json);
-        if (!data.e || !Array.isArray(data.e)) throw new Error('bad');
+        if (
+          !data ||
+          !Array.isArray(data.e) ||
+          !data.e.every(function (ex) { return typeof ex === 'string'; }) ||
+          (data.n != null && typeof data.n !== 'string')
+        ) throw new Error('bad');
       } catch (e) {
         container.innerHTML = '<p class="error">This share link is broken or incomplete.<br><a href="/">Go to Syntax</a></p>';
         return;
