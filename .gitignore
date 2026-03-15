@@ -3,6 +3,5 @@
 .DS_Store
 .superpowers/
 docs/
-verify-*.png
-mobile-nav-*.png
-ai-coach-light.png
+*.png
+!images/**/*.png
