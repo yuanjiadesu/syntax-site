@@ -2,7 +2,7 @@
 .playwright-mcp/
 .DS_Store
 .superpowers/
-docs/plans/
+docs/
 verify-*.png
 mobile-nav-*.png
 ai-coach-light.png
