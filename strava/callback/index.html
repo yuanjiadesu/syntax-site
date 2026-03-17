@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connecting to Strava — Syntax</title>
+  <style>
+    body { font-family: monospace; background: #0e0e0e; color: #e0e0e0; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; text-align: center; padding: 2rem; box-sizing: border-box; }
+    .msg { max-width: 320px; }
+    p { margin: 0.5rem 0; opacity: 0.7; font-size: 0.9rem; }
+    a { color: #fc4c02; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="msg">
+    <p>connecting to strava...</p>
+    <p id="status"></p>
+    <p style="margin-top:1.5rem; font-size:0.8rem;">
+      If nothing happens, <a id="deep-link" href="#">tap here</a> to open Syntax.
+    </p>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const error = params.get("error");
+
+    if (error) {
+      document.getElementById("status").textContent = "Strava authorization was denied.";
+    } else if (code) {
+      // Attempt to open the app via universal link scheme
+      const appUrl = "com.yuanjiasu.syntax://strava/callback" + window.location.search;
+      const deepLinkEl = document.getElementById("deep-link");
+      deepLinkEl.href = appUrl;
+
+      // Try the custom scheme first (fallback for when universal link doesn't fire)
+      window.location.href = appUrl;
+
+      // If still here after 2s, show the manual link
+      setTimeout(() => {
+        document.getElementById("status").textContent = "Could not open app automatically.";
+      }, 2000);
+    } else {
+      document.getElementById("status").textContent = "No authorization code received.";
+    }
+  </script>
+</body>
+</html>
